@@ -245,8 +245,13 @@ def main():
         root = tk.Tk()
         app = App(root)
         # opening straight onto a coin, so the app can be launched at one
-        #   open -a curve-check --args --mint <mint>
+        #   open -a curve-check --args --mint <mint> --rpc <url>
         args = sys.argv[1:]
+        if "--rpc" in args:
+            i = args.index("--rpc")
+            if i + 1 < len(args):
+                app.rpc.delete(0, "end")
+                app.rpc.insert(0, args[i + 1])
         if "--mint" in args:
             i = args.index("--mint")
             if i + 1 < len(args):
