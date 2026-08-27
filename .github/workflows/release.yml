@@ -31,12 +31,16 @@ jobs:
         run: python -c "import tkinter; print('tk', tkinter.TkVersion)"
 
       - name: install pyinstaller
-        run: pip install pyinstaller
+        # certifi is not used when running from source. it is collected into the
+        # build so the packaged app has a ca bundle, otherwise every https call
+        # fails with CERTIFICATE_VERIFY_FAILED.
+        run: pip install pyinstaller certifi
 
       - name: build the app bundle
         run: |
           pyinstaller --windowed --noconfirm --clean \
             --name "curve-check" \
+            --collect-all certifi \
             --osx-bundle-identifier "org.cadaquesenc.curvecheck" \
             curve_check_gui.py
 
@@ -67,10 +71,13 @@ jobs:
         run: python -c "import tkinter; print('tk', tkinter.TkVersion)"
 
       - name: install pyinstaller
-        run: pip install pyinstaller
+        # certifi is not used when running from source. it is collected into the
+        # build so the packaged app has a ca bundle, otherwise every https call
+        # fails with CERTIFICATE_VERIFY_FAILED.
+        run: pip install pyinstaller certifi
 
       - name: build the exe
-        run: pyinstaller --windowed --onefile --noconfirm --clean --name "curve-check" curve_check_gui.py
+        run: pyinstaller --windowed --onefile --noconfirm --clean --collect-all certifi --name "curve-check" curve_check_gui.py
 
       - name: name it for the release
         run: copy "dist\curve-check.exe" "curve-check-windows.exe"

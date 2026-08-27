@@ -37,9 +37,28 @@ def b58decode(s: str) -> bytes:
     return b"\0" * (len(s) - len(s.lstrip("1"))) + body
 
 
+def ssl_context():
+    """a packaged app has no system certificate store, so it carries its own.
+
+    running from source this is just the normal default context and nothing
+    special happens. inside a pyinstaller build there is no ca bundle unless one
+    is shipped with it, and every https call fails with CERTIFICATE_VERIFY_FAILED,
+    so the build collects certifi and this finds it.
+    """
+    import ssl
+    if getattr(sys, "frozen", False):
+        try:
+            import certifi
+            return ssl.create_default_context(cafile=certifi.where())
+        except Exception:
+            pass
+    return ssl.create_default_context()
+
+
 class Rpc:
     def __init__(self, url, sleep=0.25):
         self.url, self.sleep, self.n = url, sleep, 0
+        self.ctx = ssl_context()
 
     def call(self, method, params, tries=5):
         body = json.dumps({"jsonrpc": "2.0", "id": 1,
@@ -48,7 +67,7 @@ class Rpc:
             try:
                 req = urllib.request.Request(
                     self.url, data=body, headers={"Content-Type": "application/json"})
-                with urllib.request.urlopen(req, timeout=40) as r:
+                with urllib.request.urlopen(req, timeout=40, context=self.ctx) as r:
                     out = json.loads(r.read())
                 self.n += 1
                 time.sleep(self.sleep)

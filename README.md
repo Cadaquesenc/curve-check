@@ -62,9 +62,11 @@ the default endpoint is solana's public one. it is heavily rate limited, so a pr
 **build the app yourself**, from the same source you just read, and compare it to mine:
 
 ```
-pip install pyinstaller
-pyinstaller --windowed --noconfirm --name curve-check curve_check_gui.py
+pip install pyinstaller certifi
+pyinstaller --windowed --noconfirm --collect-all certifi --name curve-check curve_check_gui.py
 ```
+
+one honest note on that. the source is standard library only, but the packaged apps also contain `certifi`, which is just a list of certificate authorities. a packaged python has no access to your system's certificate store, so without it every https call in the built app fails. running from source does not use it.
 
 ## about the download warning
 
