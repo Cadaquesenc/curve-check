@@ -108,9 +108,17 @@ def parse_trade_events(tx):
     return out
 
 
-def fetch_trades(rpc, mint, limit):
+def fetch_trades(rpc, mint, limit, on_progress=None, cancelled=None):
+    """pull a mint's pump.fun trades.
+
+    on_progress(done, total) is called as transactions are fetched, and
+    cancelled() is polled so a caller with a user interface can stop early.
+    both are optional and the command line does not pass them.
+    """
     sigs, before, seen = [], None, set()
     while len(sigs) < limit:
+        if cancelled and cancelled():
+            return []
         p = {"limit": min(1000, limit - len(sigs))}
         if before:
             p["before"] = before
@@ -124,10 +132,13 @@ def fetch_trades(rpc, mint, limit):
         before = page[-1]["signature"]
         if len(page) < p["limit"]:
             break
+    ok = [s for s in sigs if s.get("err") is None]
     trades = []
-    for s in sigs:
-        if s.get("err") is not None:
-            continue
+    for i, s in enumerate(ok):
+        if cancelled and cancelled():
+            return []
+        if on_progress:
+            on_progress(i, len(ok))
         tx = rpc.call("getTransaction",
                       [s["signature"], {"encoding": "json",
                                         "maxSupportedTransactionVersion": 0}])
@@ -137,6 +148,8 @@ def fetch_trades(rpc, mint, limit):
             if ev["mint"] == mint:
                 ev["sig"] = s["signature"]
                 trades.append(ev)
+    if on_progress:
+        on_progress(len(ok), len(ok))
     trades.sort(key=lambda t: t["ts"])
     return trades
 

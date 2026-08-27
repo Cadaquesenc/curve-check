@@ -43,16 +43,38 @@ four ten-billionths against five hundred percent. every number above came from a
 
 that second coin opens exactly on pump.fun's canonical `k` of 3.219e25 and then its reserves swing between 0.57x and 3.54x of it inside 48 seconds.
 
-## running it
+## three ways to run it, pick whichever you like
 
-python 3, no dependencies, no install.
+the whole check is one file, `curve_check.py`, about 250 lines, standard library only. no dependencies, no install, no network calls except the rpc endpoint you can see in the code. if you are wondering whether a stranger's crypto tool is safe to run, you can read the entire thing in five minutes and know. that is a better answer than a signature is, and it is an answer most tools in this space cannot give you.
+
+**run the source.**
 
 ```
 python3 curve_check.py <mint>
 python3 curve_check.py <mint> --rpc https://your-endpoint --limit 500 --json
+python3 curve_check_gui.py            # the same thing with a window
 ```
 
 the default endpoint is solana's public one. it is heavily rate limited, so a private endpoint is a lot faster. `--limit` is how many signatures to pull back.
+
+**run the app.** the [releases page](https://github.com/Cadaquesenc/curve-check/releases) has a `.dmg` for macos and a `.exe` for windows. same code, packaged so you do not need python.
+
+**build the app yourself**, from the same source you just read, and compare it to mine:
+
+```
+pip install pyinstaller
+pyinstaller --windowed --noconfirm --name curve-check curve_check_gui.py
+```
+
+## about the download warning
+
+the binaries are not code signed, so both operating systems will say so. nothing is wrong, it is just what unsigned means. here is what you will see.
+
+**macos** says the app "cannot be opened because it is from an unidentified developer". right click the app, choose open, then open again in the dialog. after that it launches normally.
+
+**windows** shows a blue smartscreen panel saying "windows protected your pc". click "more info", then "run anyway".
+
+signing would remove both dialogs. it costs $99 a year for an apple developer account plus a windows code signing certificate on top, which is why this is not signed yet.
 
 ## the two rules
 
@@ -95,7 +117,9 @@ also readable at <https://claude.ai/code/artifact/f1a30932-98fc-439d-b37c-61e532
 ## files
 
 - `curve_check.py` : point it at a mint, check it live against public rpc
+- `curve_check_gui.py` : the same check with a window around it, for people who do not live in a terminal
 - `detector.py` : the reference implementation, runs over a directory of capture files
 - `report/second-zero.html` : the full writeup
+- `.github/workflows/release.yml` : builds the mac and windows apps on a tag
 
 MIT.

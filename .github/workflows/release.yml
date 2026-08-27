@@ -1,0 +1,99 @@
+name: release
+
+# builds the windowed app for macos and windows and attaches both to the
+# release for the tag that triggered it.
+#
+# the windows exe cannot be built on a mac, pyinstaller does not cross compile,
+# so this is the only route to one. push a tag and the windows runner does it.
+#
+# neither artifact is signed. see the readme.
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: check tkinter is present
+        run: python -c "import tkinter; print('tk', tkinter.TkVersion)"
+
+      - name: install pyinstaller
+        run: pip install pyinstaller
+
+      - name: build the app bundle
+        run: |
+          pyinstaller --windowed --noconfirm --clean \
+            --name "curve-check" \
+            --osx-bundle-identifier "org.cadaquesenc.curvecheck" \
+            curve_check_gui.py
+
+      - name: make the dmg
+        run: |
+          mkdir -p stage
+          cp -R "dist/curve-check.app" stage/
+          ln -s /Applications stage/Applications
+          hdiutil create -volname "curve-check" \
+            -srcfolder stage -ov -format UDZO \
+            "curve-check-macos.dmg"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: curve-check-macos.dmg
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: check tkinter is present
+        run: python -c "import tkinter; print('tk', tkinter.TkVersion)"
+
+      - name: install pyinstaller
+        run: pip install pyinstaller
+
+      - name: build the exe
+        run: pyinstaller --windowed --onefile --noconfirm --clean --name "curve-check" curve_check_gui.py
+
+      - name: name it for the release
+        run: copy "dist\curve-check.exe" "curve-check-windows.exe"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: curve-check-windows.exe
+
+  publish:
+    needs: [macos, windows]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: attach both to the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${GITHUB_REF_NAME}" \
+            artifacts/macos/curve-check-macos.dmg \
+            artifacts/windows/curve-check-windows.exe \
+            --repo "${GITHUB_REPOSITORY}" --clobber
