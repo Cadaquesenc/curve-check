@@ -417,7 +417,7 @@ footer{border-top:2px solid var(--rule-strong);padding-top:22px;margin-top:20px;
         <tr class="grad">
           <td class="what">Detect manufactured volume and repeat ruggers<span class="note">Not a trade</span></td>
           <td><span class="chip yes">Works</span></td>
-          <td class="mono">100% precision on the holdout, survived a red team. Covers 35.9% of launches and <strong>52.3% of all money at risk</strong></td>
+          <td class="mono">100% precision on the holdout, survived a red team. Covers 36.1% of launches and <strong>52.6% of all money at risk</strong></td>
         </tr>
       </tbody>
     </table>
@@ -693,8 +693,8 @@ footer{border-top:2px solid var(--rule-strong);padding-top:22px;margin-top:20px;
   </div>
 
   <div class="stats">
-    <div><span class="big">35.9%</span><span class="lbl">of launches the two rules flag</span></div>
-    <div><span class="big">52.3%</span><span class="lbl">of all non-creator money flows into those</span></div>
+    <div><span class="big">36.1%</span><span class="lbl">of launches the two rules flag</span></div>
+    <div><span class="big">52.6%</span><span class="lbl">of all non-creator money flows into those</span></div>
     <div><span class="big">46.9%</span><span class="lbl">of launches scoreable by creator history</span></div>
     <div><span class="big pos">100%</span><span class="lbl">precision of the manipulation rule on the holdout</span></div>
   </div>
@@ -985,7 +985,7 @@ dump rate is at or above 0.67. This threshold is the only fitted number here.</c
 
   <p><strong>And know what the survivors are worth before deciding anything.</strong> The avoidance stack is the most durable finding here and it earns <strong>&minus;0.42 SOL an hour</strong> at a small clip; it has no positive size. The creator position is the only robust positive and the <em>best operator in thirty recorded hours</em> made <strong>+8.92 SOL an hour</strong> from it, while the median one made 0.17 SOL in total. Whatever you decide about the ethics, decide it against those numbers rather than against the percentages.</p>
 
-  <p><strong>Build the detector instead, if you build anything.</strong> Two rules, no model, no training, no fitting. One is arithmetic that cannot be violated by an honest trade; the other is a running count per creator. Together they flag 35.9% of launches and cover 52.3% of the money being taken. Nobody else appears to have the first one &mdash; flux&rsquo;s own decoder already self-checks the fee identity and passes it 100%, and it does not check the curve identity, which is the one that catches this.</p>
+  <p><strong>Build the detector instead, if you build anything.</strong> Two rules, no model, no training, no fitting. One is arithmetic that cannot be violated by an honest trade; the other is a running count per creator. Together they flag 36.1% of launches and cover 52.6% of the money being taken. Nobody else appears to have the first one &mdash; flux&rsquo;s own decoder already self-checks the fee identity and passes it 100%, and it does not check the curve identity, which is the one that catches this.</p>
   <p><strong>Two honest caveats on that.</strong> It protects other people, not you; there is no version of it that turns into a position. And the certainty and the reach live in different rules &mdash; the one with no false positives reaches 2.2% of the money, and the one that reaches half the money is the 0.82 that a red team just marked down from 0.94.</p>
   <p><strong>And if you ever capture again, these six fields are the difference between answerable and blind.</strong> Every one of them cost this sweep something specific &mdash; agents re-briefed mid-run, tests declared impossible, numbers reconstructed instead of measured. Ordered by what they unlock:</p>
 
@@ -1083,6 +1083,13 @@ dump rate is at or above 0.67. This threshold is the only fitted number here.</c
   </div>
   <p><strong>A rule trading the top 2% could only ever prove itself here if it made about seven percent a trade.</strong> So the negatives on broad populations are solid, and any positive-looking number on a narrow slice &mdash; including the ones in this report &mdash; is under-powered by construction. That is not a reason to disbelieve them; it is a reason to say what they are.</p>
 
+  <div class="box flag col">
+    <h3>A correction made after publication</h3>
+    <p>Two figures on this page were stale when it went out, and a third that looks wrong is not.</p>
+    <p>Re-running <code>detector.py</code> over the same corpus returns <strong>36.1% of launches and 52.6% of the money</strong>, against the <strong>35.9%</strong> and <strong>52.3%</strong> originally published here. The argument is unchanged and the direction is unchanged. The numbers on this page have been updated to what the code actually returns. It is a small gap, but this document has no business asking anyone to check its arithmetic if it will not check its own.</p>
+    <p style="margin-bottom:0">The third is worth stating precisely because it reads like an error. This page says the flagged account touches <strong>14.9%</strong> of the corpus, while <code>FINDINGS.md</code> reports 15.5% and 17.2% from two independent routes. Those are three different counts over the same 12,089 denominator, not a contradiction. The 1,872-coin union behind 15.5% includes <strong>74 coins flagged only by a rescaled launch curve, with no wallet evidence at all</strong>; drop those and 1,798 wallet-verified coins remain, which is 14.9% of 12,089. The figure quoted on this page is the strictest of the three, which is the right one for it to be.</p>
+  </div>
+
   <h3>Three numbers that were wrong and got caught</h3>
   <ul>
     <li>An exit agent charged own-order impact into the recorded reserve, as if its own buy had evaporated from the curve. I challenged it, derived the correct treatment, and it found the bug: round-trip impact on a constant-product curve is <strong>exactly zero</strong> at an unchanged reserve, at any size. Every number moved 1.5 to 5.7 points.</li>
@@ -1131,7 +1138,7 @@ dump rate is at or above 0.67. This threshold is the only fitted number here.</c
 
 <footer class="col">
   <p>Run 27 August 2026, 10:35&ndash;13:50 UTC. Thirty-one agents across four waves, read-only on <code>STS/data/</code> and <code>flux/data/</code>; nothing was written to either and nothing was committed to the repo. Every number here came from a command that was run, not from memory.</p>
-  <p>The durable copy is <code>~/Code/backups/sts-edge-sweep-2026-08-27/</code> &mdash; <code>FINDINGS.md</code> is the full evidence with every result, correction and pasted output; <code>detector.py</code> is the two rules implemented and run; <code>coins-extract.jsonl</code> and <code>extract.py</code> are the corrected per-coin projection everything was built on, with its two known gaps documented. The corpus defects found today were also posted to the shared coordination board inside the repo, which is gitignored and will not survive &mdash; if any of it should outlast the machine, it needs a commit.</p>
+  <p>The durable copy is <code>~/Code/backups/sts-edge-sweep-2026-08-27/</code> &mdash; <code>FINDINGS.md</code> is the full evidence with every result, correction and pasted output; <code>detector.py</code> is the two rules implemented and run; <code>coins-extract.jsonl</code> and <code>extract.py</code> are the corrected per-coin projection everything was built on, with its two known gaps documented. The corpus defects found today were also posted to the shared coordination board inside the repo, which is gitignored and would not have survived the machine. It has since been committed alongside the rest of this directory, and is preserved as <code>COORDINATION-BOARD.md</code>.</p>
 </footer>
 
 </div>
