@@ -119,6 +119,7 @@ also readable at <https://claude.ai/code/artifact/f1a30932-98fc-439d-b37c-61e532
 - `curve_check.py` : point it at a mint, check it live against public rpc
 - `curve_check_gui.py` : the same check with a window around it, for people who do not live in a terminal
 - `detector.py` : the reference implementation, runs over a directory of capture files
+- `extension/` : the same check as a chrome extension, badges the coin page you are on
 - `report/second-zero.html` : the full writeup
 - `.github/workflows/release.yml` : builds the mac and windows apps on a tag
 

@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "curve check",
+  "version": "0.1.0",
+  "description": "Tests a pump.fun coin against the bonding curve identity. Shows the evidence so you can check it yourself.",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["https://api.mainnet-beta.solana.com/*"],
+  "optional_host_permissions": ["https://*/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pump.fun/*",
+        "https://*.pump.fun/*",
+        "https://dexscreener.com/*",
+        "https://*.dexscreener.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}
