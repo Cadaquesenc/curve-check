@@ -9,6 +9,8 @@ this checks that, live, on any mint you point it at. it is arithmetic. there is 
 
 both are the same code as `curve_check_gui.py` in the repo, packaged so you do not need python installed.
 
+one honest note on the windows one. it is built on a windows runner and carries the same certificate fix as the mac build, but i do not have a windows machine and nobody has launched it yet. the mac build i have opened and run myself, and the output further down came out of it. if you run the windows one, open an issue and tell me what happened, and i will put the answer here.
+
 ## you do not have to trust the binary
 
 the whole check is one file, `curve_check.py`, about 250 lines, standard library only. no dependencies, no install, no network calls except the rpc endpoint you can read in the source. anyone suspicious of a stranger's crypto tool can read the entire thing in five minutes and know exactly what it does.
@@ -23,11 +25,13 @@ python3 curve_check_gui.py
 or build the app yourself from that same source and compare it to mine:
 
 ```
-pip install pyinstaller
-pyinstaller --windowed --noconfirm --name curve-check curve_check_gui.py
+pip install pyinstaller certifi
+pyinstaller --windowed --noconfirm --collect-all certifi --name curve-check curve_check_gui.py
 ```
 
 three routes, same arithmetic. take whichever one you like.
+
+the `certifi` part matters and is not optional. a packaged python has no access to your system's certificate store, so a build without it fails every https call it makes. the source does not need it, only the packaged app does.
 
 ## the download warning
 

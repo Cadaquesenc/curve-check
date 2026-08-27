@@ -57,7 +57,7 @@ python3 curve_check_gui.py            # the same thing with a window
 
 the default endpoint is solana's public one. it is heavily rate limited, so a private endpoint is a lot faster. `--limit` is how many signatures to pull back.
 
-**run the app.** the [releases page](https://github.com/Cadaquesenc/curve-check/releases) has a `.dmg` for macos and a `.exe` for windows. same code, packaged so you do not need python.
+**run the app.** the [releases page](https://github.com/Cadaquesenc/curve-check/releases) has a `.dmg` for macos and a `.exe` for windows. same code, packaged so you do not need python. the mac build i have opened and run myself. the windows one is built on a windows runner by the same workflow and carries the same certificate fix, but i do not have a windows machine, so nobody has launched it yet. if you run it, open an issue and tell me what happened.
 
 **build the app yourself**, from the same source you just read, and compare it to mine:
 
