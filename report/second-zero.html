@@ -1,0 +1,1137 @@
+<title>Second Zero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#F5F5F1;
+  --panel:#FFFFFF;
+  --panel-2:#EFEFEA;
+  --ink:#181B1E;
+  --ink-soft:#454C53;
+  --muted:#787F86;
+  --rule:#DBDBD3;
+  --rule-strong:#C3C3B9;
+  --accent:#2E4A5C;
+  --neg:#9C3B2E;
+  --neg-bg:#F2E4E1;
+  --pos:#4E6B3C;
+  --pos-bg:#E5EBDE;
+  --warn:#856317;
+  --warn-bg:#F2EBDA;
+  --shadow:0 1px 2px rgba(24,27,30,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#14171A;
+    --panel:#1B1F23;
+    --panel-2:#22262B;
+    --ink:#E7E8E3;
+    --ink-soft:#AEB5BB;
+    --muted:#828A91;
+    --rule:#2B3036;
+    --rule-strong:#3B424A;
+    --accent:#89AFC4;
+    --neg:#DE8672;
+    --neg-bg:#33221E;
+    --pos:#A2BE81;
+    --pos-bg:#23291C;
+    --warn:#D6AA55;
+    --warn-bg:#2E2818;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14171A;
+  --panel:#1B1F23;
+  --panel-2:#22262B;
+  --ink:#E7E8E3;
+  --ink-soft:#AEB5BB;
+  --muted:#828A91;
+  --rule:#2B3036;
+  --rule-strong:#3B424A;
+  --accent:#89AFC4;
+  --neg:#DE8672;
+  --neg-bg:#33221E;
+  --pos:#A2BE81;
+  --pos-bg:#23291C;
+  --warn:#D6AA55;
+  --warn-bg:#2E2818;
+  --shadow:none;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 96px}
+.col{max-width:68ch}
+
+/* ---------- masthead ---------- */
+header.mast{
+  border-bottom:2px solid var(--rule-strong);
+  padding:56px 0 26px;
+  margin-bottom:38px;
+}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:20px;
+}
+h1{
+  font-family:Archivo,system-ui,sans-serif;
+  font-weight:700;font-size:clamp(40px,7vw,74px);line-height:.98;
+  letter-spacing:-.026em;margin:0 0 18px;text-wrap:balance;
+}
+.dek{
+  font-size:clamp(19px,2.3vw,23px);line-height:1.45;color:var(--ink-soft);
+  max-width:34ch;margin:0 0 26px;text-wrap:balance;
+}
+.runbar{
+  display:flex;flex-wrap:wrap;gap:0;
+  border:1px solid var(--rule);background:var(--panel);border-radius:3px;
+  overflow:hidden;
+}
+.runbar div{
+  flex:1 1 150px;padding:13px 16px;border-right:1px solid var(--rule);
+}
+.runbar div:last-child{border-right:none}
+.runbar .k{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;
+}
+.runbar .v{
+  font-family:Archivo,sans-serif;font-weight:600;font-size:21px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+}
+
+/* ---------- structure ---------- */
+section{margin:0 0 62px}
+h2{
+  font-family:Archivo,sans-serif;font-weight:600;
+  font-size:clamp(25px,3vw,33px);line-height:1.14;letter-spacing:-.018em;
+  margin:0 0 6px;text-wrap:balance;
+}
+h2 .num{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;
+  color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:9px;
+}
+h3{
+  font-family:Archivo,sans-serif;font-weight:600;font-size:19px;
+  letter-spacing:-.008em;margin:34px 0 8px;text-wrap:balance;
+}
+.sub{color:var(--muted);font-size:16px;margin:0 0 24px;max-width:62ch}
+p{margin:0 0 16px}
+.col p, .col ul{max-width:68ch}
+strong{font-weight:600;color:var(--ink)}
+a{color:var(--accent)}
+ul{margin:0 0 16px;padding-left:20px}
+li{margin-bottom:7px}
+hr{border:none;border-top:1px solid var(--rule);margin:46px 0}
+
+/* ---------- verdict chips ---------- */
+.chip{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;white-space:nowrap;
+}
+.chip.no{background:var(--neg-bg);color:var(--neg)}
+.chip.yes{background:var(--pos-bg);color:var(--pos)}
+.chip.part{background:var(--warn-bg);color:var(--warn)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:0 0 22px;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{
+  padding:10px 14px;text-align:left;border-bottom:1px solid var(--rule);
+  vertical-align:top;
+}
+thead th{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  background:var(--panel-2);border-bottom:1px solid var(--rule-strong);
+  white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+td.mono{font-family:"IBM Plex Mono",monospace;font-size:13px}
+.what{font-weight:600;font-size:15px}
+.note{color:var(--muted);font-size:13.5px;display:block;margin-top:2px;line-height:1.42}
+tbody tr.grad td{background:var(--panel-2)}
+
+/* ---------- callout ---------- */
+.pull{
+  border-left:3px solid var(--accent);
+  padding:4px 0 4px 20px;margin:26px 0;
+  font-size:20px;line-height:1.45;color:var(--ink);max-width:56ch;
+}
+.pull .src{
+  display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:10px;
+}
+.box{
+  border:1px solid var(--rule);border-radius:3px;background:var(--panel);
+  padding:20px 22px;margin:0 0 22px;box-shadow:var(--shadow);
+}
+.box.flag{border-left:3px solid var(--warn)}
+.box.good{border-left:3px solid var(--pos)}
+.box h3{margin-top:0}
+
+/* ---------- stat row ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin:0 0 24px}
+.stats div{background:var(--panel);padding:16px 18px}
+.stats .big{
+  font-family:Archivo,sans-serif;font-weight:700;font-size:30px;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;line-height:1.05;display:block;
+}
+.stats .lbl{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-top:7px;line-height:1.5;
+}
+.stats .neg{color:var(--neg)}
+.stats .pos{color:var(--pos)}
+
+pre{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;
+  background:var(--panel);border:1px solid var(--rule);border-radius:3px;
+  padding:16px 18px;overflow-x:auto;margin:0 0 22px;
+}
+code{font-family:"IBM Plex Mono",monospace;font-size:.87em;
+  background:var(--panel-2);padding:1px 5px;border-radius:2px}
+pre code{background:none;padding:0;font-size:inherit}
+
+footer{border-top:2px solid var(--rule-strong);padding-top:22px;margin-top:20px;
+  color:var(--muted);font-size:14px}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 64px}
+  .runbar div{flex:1 1 50%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">
+    <span>STS · edge audit</span><span>27 August 2026</span><span>31 independent agents</span><span>read-only on the real captures</span>
+  </div>
+  <h1>Second Zero</h1>
+  <p class="dek">Thirty-one ways of asking whether this thing can make money. One of them pays, it is the rug, and it is worth nine SOL an hour.</p>
+  <div class="runbar">
+    <div><span class="k">Corpus</span><span class="v">12,089</span></div>
+    <div><span class="k">Tradeable</span><span class="v">5,096</span></div>
+    <div><span class="k">Rules tested</span><span class="v">4.6M</span></div>
+    <div><span class="k">Entry signals that pay</span><span class="v">0</span></div>
+    <div><span class="k">Holdout</span><span class="v">08-16</span></div>
+  </div>
+</header>
+
+<section class="col">
+  <h2><span class="num">The answer</span>No entry signal survived. One and a half positions did.</h2>
+  <p>Every entry rule, exit rule, filter, wallet-following scheme and combination tested today came back negative, and most came back negative for a reason nobody expected going in. The failures are not near misses. The best realizable rule anywhere in the sweep is about two and a half percentage points short of paying its own fee.</p>
+  <p><strong>One and a half positions in this market have positive expectancy, and neither is an analysis.</strong> Both are about <em>where you stand in the transaction</em> rather than which coin you pick:</p>
+  <ul>
+    <li><strong>Launching the coin and selling inside the minute</strong> pays <strong>+39.7% on stake</strong> before fees, on 3,347 creators, with no valuation assumption needed. In SOL rather than percent that is <strong>+8.92 an hour to the best operator in thirty recorded hours and 0.17 in total to the median one</strong> &mdash; weigh it against those. <strong>It is the rug, it is genuinely available, and I will not help build it</strong>, but that is a decision for you to make on the merits rather than one this page makes for you by word choice.</li>
+    <li><strong>Being inside the launch bundle</strong> looked like it paid about +11% per SOL &mdash; and a final audit found that figure is a <strong>marginal price</strong>, available only to a wallet whose cohort holds still. Priced as one book, which is what it is, the seat pays <strong>+1.86%</strong> and is <strong>negative on the holdout</strong>. See below.</li>
+  </ul>
+  <p>The thing that would make the second one pay is a rule for choosing <em>which</em> launches to bundle. One exists &mdash; bundle size is predictable before the block at Spearman 0.51 out of sample &mdash; and it still does not pay, because it buys you 0.27&times; of headroom and costs you 0.19&times; of worse fill. The entire edge lives in one block position and a new entrant does not get it.</p>
+  <p>What did survive as a usable artefact is a pair of detectors. One is arithmetic an honest trade cannot violate, and it flags manufactured volume with no false positives anywhere in the corpus; the other is a running count per creator, and a red team cut its headline from 0.94 to 0.82. Neither becomes a position. Together they cover half the money being taken here.</p>
+
+  <div class="pull">
+    The median trade is &minus;2.11% at every horizon, and &minus;2.11% is exactly the round-trip fee.
+    <span class="src">Own cross-check, 5,096 clean coins</span>
+  </div>
+
+  <p>That single line is the shape of the problem. The median pump.fun launch never trades above its own three-second price again, so the median outcome is that you pay the toll and nothing happens. Shortening the hold walks the mean toward the fee floor and never through it. With <em>perfect foresight of the peak</em>, only 38.2% of trades finish above water.</p>
+
+  <p>It is also not a bad week. Buying every clean coin at second three and holding to sixty, priced with own-order impact from the curve at both ends, on each capture day separately:</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Day</th><th class="n">n</th><th class="n">Net per trade</th><th class="n">95% interval</th><th class="n">Median</th><th class="n">Profitable</th></tr></thead>
+      <tbody>
+        <tr><td>08-15</td><td class="n">65</td><td class="n">&minus;9.60%</td><td class="n">[&minus;18.56, &minus;0.63]</td><td class="n">&minus;6.47%</td><td class="n">15.4%</td></tr>
+        <tr><td>08-16 <span class="note">the holdout</span></td><td class="n">944</td><td class="n">&minus;8.67%</td><td class="n">[&minus;11.28, &minus;6.05]</td><td class="n">&minus;4.34%</td><td class="n">11.7%</td></tr>
+        <tr><td>08-20</td><td class="n">3,122</td><td class="n">&minus;11.11%</td><td class="n">[&minus;12.88, &minus;9.34]</td><td class="n">&minus;9.11%</td><td class="n">9.6%</td></tr>
+        <tr><td>08-21</td><td class="n">908</td><td class="n">&minus;5.96%</td><td class="n">[&minus;7.08, &minus;4.83]</td><td class="n">&minus;2.11%</td><td class="n">7.6%</td></tr>
+        <tr class="grad"><td><strong>all four</strong></td><td class="n">5,039</td><td class="n"><strong>&minus;9.70%</strong></td><td class="n">[&minus;10.93, &minus;8.48]</td><td class="n">&minus;4.85%</td><td class="n">9.7%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Every day negative, every interval excluding zero, range &minus;6% to &minus;11%. The three earlier days cannot be scored at all &mdash; that recorder wrote no price series &mdash; and that is stated rather than averaged over.</p>
+</section>
+
+<section>
+  <h2><span class="num">The scorecard</span>Everything that was tried</h2>
+  <p class="sub">Each row is an independent agent working the raw captures, with its own code, its own corpus corrections, a shuffled null, a matched-exposure control, multiplicity correction, and one scored pass on the 08-16 holdout. Break-even is +2.12% gross.</p>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th>Hypothesis</th><th>Verdict</th><th>The number that decided it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="what">Buy at three seconds, hold<span class="note">The thing STS was built to do</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">&minus;9.70% mean, &minus;2.11% median, 9.7% of trades profitable</td>
+        </tr>
+        <tr>
+          <td class="what">Wait until second 20, buy what is still climbing<span class="note">Let the market resolve the direction for you</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">&minus;4.92%. Perfect-hindsight ceiling at a 20s entry is <strong>+0.42% net</strong> &mdash; even a flawless exit barely breaks even</td>
+        </tr>
+        <tr>
+          <td class="what">Do new buyers keep arriving after second 20?<span class="note">Tested at the mechanism, not the P&amp;L</span></td>
+          <td><span class="chip part">Half</span></td>
+          <td class="mono">Yes: 25.0 new wallets vs a base of 3.8, 100th percentile of its null, replicates on the holdout. But the curve <strong>loses 4.8 SOL net</strong>; price falls hardest where most arrive</td>
+        </tr>
+        <tr>
+          <td class="what">Predict direction inside the volatile shortlist<span class="note">Signals predict magnitude; can they predict sign?</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">Best clean AUC 0.657 on n=141; best realizable slice <strong>&minus;2.02%</strong> against a 2.12% round trip</td>
+        </tr>
+        <tr>
+          <td class="what">The curve-completion bet<span class="note">Buy at reserve X, sell before the curve completes. Payoff is deterministic</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">34 of 36 cells negative. Reaching 80 SOL happens <strong>16 times in 5,961 coins</strong>, and 8 of those 16 never print a sellable price before completing</td>
+        </tr>
+        <tr>
+          <td class="what">Follow insider wallets<span class="note">Creator-funded, co-occurring, bundled</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">The window is <strong>negative</strong>: median 1s from insider buy to first sell, against 1.7s of observable latency (a best-case figure &mdash; see below). Matched on busyness the flag is actively harmful (t = &minus;3.4)</td>
+        </tr>
+        <tr>
+          <td class="what">Trade on creator behaviour<span class="note">Dump timing, the no-dump cohort, creator history</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">Prediction is superb (see below) and the live signal is <strong>bearish</strong>: &minus;9.94% vs &minus;8.74% for buying everything</td>
+        </tr>
+        <tr>
+          <td class="what">Event-driven exits<span class="note">646 rules on flow, participants, size, curve state, arrivals</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">At the quoted 1.7s latency &mdash; a best case, see below &mdash; <strong>0 of 646</strong> beat doing nothing. The whole information set is worth +0.64pp over a coin flip on the clock</td>
+        </tr>
+        <tr>
+          <td class="what">Ride the account behind the fake volume<span class="note">15% of the corpus and most of the big moves</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">~120 configurations; one nominal positive whose CI straddles 1 and which sits <em>below</em> its own shuffled null</td>
+        </tr>
+        <tr>
+          <td class="what">Fresh buyers versus recurring bots<span class="note">Is genuinely new money arriving, or is it a closed loop?</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">Worth at most <strong>0.3% of variance</strong> and wrong-signed. The closed-loop filter is a busyness filter in disguise</td>
+        </tr>
+        <tr>
+          <td class="what">Social velocity, coin metadata, transaction cost<span class="note">Everything captured but never tested</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">Transaction cost untestable (zero mint overlap). Velocity points the wrong way. <code>initialBuySol</code> is a bounded-downside artefact: &Delta;R&sup2; +0.011 &rarr; <strong>+0.00003</strong> once entry price is controlled</td>
+        </tr>
+        <tr>
+          <td class="what">Provide liquidity instead of taking it<span class="note">Buy into outflow, sell into arrivals &mdash; the mirror of everything else</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono"><strong>No mean reversion at any horizon.</strong> 312 cells, 8 positive, none clearing the fee. The one real signal &mdash; exit into arriving liquidity, +2.03pp against four nulls, replicating at +1.30pp &mdash; is a <em>discount on the loss</em>, not a profit</td>
+        </tr>
+        <tr>
+          <td class="what">Everything at once<span class="note">Can combined weak signals clear the bar?</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono" id="slot-ensemble">184 features, three model families, nested day-block CV. Best of <strong>~4,400 configurations: &minus;0.44%</strong> out of fold, &minus;1.72% on the holdout, both CIs spanning zero and both inside their shuffled null</td>
+        </tr>
+        <tr>
+          <td class="what">Reverse-engineer the wallets that won<span class="note">Start from who got paid, not from a signal</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">They are real and they repeat (holdout p = 5e&minus;6). The thing that repeats is <strong>being inside the launch transaction</strong>. Copying them is negative at every lag, size and hold</td>
+        </tr>
+        <tr>
+          <td class="what">Get further forward in the launch block<span class="note">The tweet exists before the coin &mdash; can you use the lead?</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">Early position IS a capability (teams hold rank at rho +0.82, holdout +0.58) but is bought with <strong>size and reaction speed, not tweet lead</strong>. Longer lead means a deader coin (rho &minus;0.335); only <strong>4.3% of launches</strong> have both lead and a bundle worth joining</td>
+        </tr>
+        <tr>
+          <td class="what">Read the winners one at a time<span class="note">A case study, not a regression</span></td>
+          <td><span class="chip no">Retracted</span></td>
+          <td class="mono">Looked like a real mechanism &mdash; 6 coins, five hitting 2&times;. A later audit found a <strong>60-second lookahead in the definition</strong> and that the coordination adds nothing: <strong>it is the SOL, not the swarm</strong>. Retracted</td>
+        </tr>
+        <tr>
+          <td class="what">Twelve-hour horizon and post-graduation<span class="note">A two-sided pool, where shorting becomes possible</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">0 of <strong>1,468 hypotheses</strong> survives correction; best gross edge is a third of the fee. Post-migration price is <strong>not in the corpus at all</strong> &mdash; unanswerable rather than negative</td>
+        </tr>
+        <tr>
+          <td class="what">The wallet graph as a network, and regime<span class="note">Two methods never applied</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono">120 real communities, structure far above a degree-preserving null, membership persisting nine days &mdash; and <strong>zero payoff</strong> once wallet count is controlled (best family-wise p 0.18). No time cell crosses zero</td>
+        </tr>
+        <tr>
+          <td class="what">Exhaustive rule mining<span class="note">Fitting a model and mining for pockets are different searches</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono"><strong>4,616,401 rules.</strong> Best sits <em>below the median</em> of a shuffled max-statistic null (p&nbsp;=&nbsp;0.38) and scores &minus;2.20% on a frozen holdout. The real corpus yields <strong>fewer</strong> profitable-looking rules than chance</td>
+        </tr>
+        <tr>
+          <td class="what">How long you have to get out<span class="note">The map, as a function of the wallet book</span></td>
+          <td><span class="chip no">No</span></td>
+          <td class="mono"><strong>75.6% of coins have no profitable window at all.</strong> The 0.823 was later refuted &mdash; it is a <em>draw-count</em> detector; within draw strata buyer count scores 0.4455, worse than a coin flip. The widest-window coins return <strong>&minus;14.49%</strong></td>
+        </tr>
+        <tr>
+          <td class="what">The files nobody opened<span class="note">Six file types, including the recorder&rsquo;s own logs</span></td>
+          <td><span class="chip part">Three fixes</span></td>
+          <td class="mono">Latency is <strong>4.08s median, not 1.7s</strong>; duty cycle measured at <strong>4.33%</strong> of wall clock; and a test declared impossible was runnable, and comes back empty</td>
+        </tr>
+        <tr class="grad">
+          <td class="what">What the survivors are worth in SOL<span class="note">Capacity accounting &mdash; the method nobody applied</span></td>
+          <td><span class="chip part">Both shrink</span></td>
+          <td class="mono">The avoidance stack&rsquo;s capacity is <strong>0.02 SOL per coin</strong> &mdash; its edge <em>is</em> refusing every coin with liquidity &mdash; and it earns &minus;0.42 SOL/hour. The creator position pays the best operator <strong>+8.92 SOL/hour</strong> and the median one 0.17 SOL in total</td>
+        </tr>
+        <tr class="grad">
+          <td class="what">Red-teaming the red teams<span class="note">Waves 2 and 3 had never been checked</span></td>
+          <td><span class="chip part">3 of 5 fell</span></td>
+          <td class="mono">The swarm, the capped coins and the exit-window AUC all <strong>refuted</strong>. The latency correction and the rule-mining null <strong>survived independent replication</strong> &mdash; and two of the miner&rsquo;s sub-claims, including this page&rsquo;s closing line, were withdrawn</td>
+        </tr>
+        <tr class="grad">
+          <td class="what">Does the money conserve, and where does it go?<span class="note">Context, not a buy-side strategy</span></td>
+          <td><span class="chip yes">Settled</span></td>
+          <td class="mono">Conservation confirmed by three routes to 0.18% of gross inflow. The creator&rsquo;s take is <strong>+2.95 to +6.46 per 100</strong> non-creator SOL against the exchange&rsquo;s 1.99 &mdash; a bracket that does not cross zero</td>
+        </tr>
+        <tr class="grad">
+          <td class="what">Launch the coin and sell inside the minute<span class="note">A position, not an analysis</span></td>
+          <td><span class="chip yes">Works</span></td>
+          <td class="mono"><strong>+39.69% on stake</strong> pre-fee (n=3,347, 67.6% positive, no valuation assumption needed). 95% confidence of cumulative profit after ten launches. It is the rug &mdash; see below</td>
+        </tr>
+        <tr class="grad">
+          <td class="what">Buy a seat in the launch bundle<span class="note">Second zero is the only positive arrival bucket</span></td>
+          <td><span class="chip part">Priced in</span></td>
+          <td class="mono">Priced <em>per wallet</em> it is +0.15 at the last incumbent&rsquo;s price. Priced <strong>as a book</strong>, which is what it is, it is <strong>+1.86% and negative on the holdout</strong> &mdash; the cohort is a median 58.5% of the reserve it must sell into</td>
+        </tr>
+        <tr class="grad">
+          <td class="what">Detect manufactured volume and repeat ruggers<span class="note">Not a trade</span></td>
+          <td><span class="chip yes">Works</span></td>
+          <td class="mono">100% precision on the holdout, survived a red team. Covers 35.9% of launches and <strong>52.3% of all money at risk</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">Why</span>Three facts that explain the shape of it</h2>
+
+  <div class="col">
+    <h3>First, what this market actually is</h3>
+    <p>Before any of the failures make sense, it helps to see the population. All 12,089 coins, sorted by what they are rather than what they did:</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Category</th><th class="n">n</th><th class="n">Share</th><th class="n">&ge;1.5&times;</th><th class="n">&ge;5&times;</th><th class="n">Graduates</th><th class="n">Median end</th></tr></thead>
+      <tbody>
+        <tr><td>never traded &mdash; a launch and nothing else</td><td class="n">3,446</td><td class="n">28.5%</td><td class="n">0%</td><td class="n">0%</td><td class="n">1.94%</td><td class="n">1.0000</td></tr>
+        <tr><td>manufactured volume</td><td class="n">1,872</td><td class="n">15.5%</td><td class="n">32.21%</td><td class="n">3.47%</td><td class="n">0.64%</td><td class="n">0.6412</td></tr>
+        <tr><td>no usable price series</td><td class="n">1,675</td><td class="n">13.9%</td><td class="n">10.51%</td><td class="n">0.42%</td><td class="n">1.25%</td><td class="n">0.9835</td></tr>
+        <tr><td>graduated inside the launch bundle</td><td class="n">37</td><td class="n">0.3%</td><td class="n">0%</td><td class="n">0%</td><td class="n">100%</td><td class="n">1.0000</td></tr>
+        <tr><td><strong>ordinary launch</strong></td><td class="n">5,059</td><td class="n">41.8%</td><td class="n">9.27%</td><td class="n">0.42%</td><td class="n">0.26%</td><td class="n">0.9570</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p>Nearly three in ten launches never trade at all, and one in six is manufactured. What is left &mdash; the tradeable universe, clean and with a real price series &mdash; is <strong>5,096 coins, 42% of the corpus</strong>, whose median peak multiple is exactly <strong>1.0000</strong>. Independent confirmation from full-block history, where nothing is missing: about one launch in three attracts two outside buyers or fewer, and the median attracts four.</p>
+    <h3>1. Half the money is in before you can press the button</h3>
+    <p>Each wallet&rsquo;s first trade second is recorded exactly, so this is not an estimate. Across 8,191 clean coins and 137,146 wallet arrivals:</p>
+  </div>
+
+  <div class="stats">
+    <div><span class="big">26.2%</span><span class="lbl">of wallets arrive in second zero</span></div>
+    <div><span class="big">46.6%</span><span class="lbl">of all SOL arrives with them</span></div>
+    <div><span class="big">59.1%</span><span class="lbl">of the money is in by second three</span></div>
+    <div><span class="big">97.6%</span><span class="lbl">of coins open in second zero</span></div>
+  </div>
+
+  <div class="col">
+    <p>Second three is when STS decides. By then six tenths of everything that will ever be staked has arrived, and the price it set is the price you pay. Every other agent hit the same wall from a different side: 83.5% of graduations complete inside second zero, 92.3% of first insider buys land in the launch&rsquo;s own ten-millisecond bucket, and the perfect-exit ceiling at a twenty-second entry is four tenths of one percent.</p>
+  </div>
+
+  <div class="box flag col">
+    <h3>But this is only true of the coins that go nowhere</h3>
+    <p>I wrote the paragraph above too strongly and then checked it. Split by what the coin went on to do, the picture inverts:</p>
+    <div class="tw" style="margin-top:14px">
+      <table>
+        <thead><tr><th>Outcome</th><th class="n">n</th><th class="n">In second 0</th><th class="n">By second 3</th><th class="n">SOL arriving after second 3</th></tr></thead>
+        <tbody>
+          <tr><td>dead (peak 1.00&times;)</td><td class="n">5,014</td><td class="n">86.3%</td><td class="n">93.5%</td><td class="n">0.46</td></tr>
+          <tr><td>small (1.0&ndash;1.5&times;)</td><td class="n">2,185</td><td class="n">45.1%</td><td class="n">62.3%</td><td class="n">7.99</td></tr>
+          <tr><td>mover (1.5&ndash;2&times;)</td><td class="n">349</td><td class="n">26.3%</td><td class="n">40.6%</td><td class="n">30.57</td></tr>
+          <tr><td>big (2&ndash;5&times;)</td><td class="n">268</td><td class="n">14.4%</td><td class="n">24.8%</td><td class="n">65.95</td></tr>
+          <tr><td><strong>huge (5&times;+)</strong></td><td class="n">28</td><td class="n"><strong>7.4%</strong></td><td class="n"><strong>18.5%</strong></td><td class="n"><strong>140.81</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-bottom:0">On a coin that goes 5&times;, <strong>81.5% of the money it will ever take arrives after second three</strong>, averaging 141 SOL. The window is real and so is the liquidity. What is missing is the ability to tell, at second three, which coin you are looking at &mdash; and that has now failed six independent tests. <strong>It is not that there is no time. It is that you cannot tell.</strong></p>
+  </div>
+
+  <div class="col">
+    <h3>The only profitable seat is inside the launch transaction &mdash; and it is taken</h3>
+    <p>Approached from the other end &mdash; start with the wallets that actually got paid, not with a signal &mdash; the same fact appears again, and this time with a sharp edge on it. <code>who[].at</code> records each wallet&rsquo;s first trade to ten-millisecond resolution, so the arrival bucket can be cut finely:</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>First trade at</th><th class="n">Wallet rows</th><th class="n">Mean net per SOL</th><th class="n">Win rate</th></tr></thead>
+      <tbody>
+        <tr><td><strong>second 0 &mdash; the launch bundle</strong></td><td class="n">7,388</td><td class="n"><strong>+0.1129</strong></td><td class="n">39.5%</td></tr>
+        <tr><td>0 to 50 ms</td><td class="n">7,175</td><td class="n">&minus;0.0627</td><td class="n">36.7%</td></tr>
+        <tr><td>50 ms to 1 s</td><td class="n">12,400</td><td class="n">&minus;0.0511</td><td class="n">30.8%</td></tr>
+        <tr><td>1 to 3 s</td><td class="n">12,323</td><td class="n">&minus;0.1095</td><td class="n">26.3%</td></tr>
+        <tr><td>3 to 10 s</td><td class="n">27,753</td><td class="n">&minus;0.1666</td><td class="n">26.5%</td></tr>
+        <tr><td>after 10 s</td><td class="n">55,157</td><td class="n">&minus;0.3295</td><td class="n">17.6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p><strong>Second zero is 6% of all wallet rows and the only bucket that is positive.</strong> Of the fifty biggest non-creator winners, 46 have most of their positions at 50 milliseconds or earlier and 37 at exactly zero. Their median entry is 0.01 seconds against 10.29 for everyone else on the same coins.</p>
+    <p>Getting that number right took three attempts, because the whole bucket flips sign on how you value tokens a wallet had not sold when the recorder stopped watching. The measurement that needs <em>no</em> valuation at all uses each wallet&rsquo;s real observed fill price and a mechanical curve-priced exit three seconds later. On that basis the third-party residual at second zero returns <strong>+0.1095 per SOL</strong> [+0.0987, +0.1203], median +0.0147, win rate 52.7%. And it is not creators or the manipulation account carrying it &mdash; the independent third parties are the <em>more</em> profitable half.</p>
+    <p>It survives everything thrown at it. Matched for exposure, second zero returns +0.1095 while every other bucket sits between &minus;0.021 and +0.026. Compared <em>within the same coin</em> against wallets that arrived later, it earns <strong>+0.1758 and wins on 73.4% of 1,937 coins</strong>, against a within-coin shuffled null where none of 500 permutations came close. Drop the three best coins and it is still +0.0681. The seat is also genuinely open: 2,598 different wallets have occupied it and <strong>62% appear exactly once</strong>.</p>
+  </div>
+
+  <div class="box flag col">
+    <h3>And then the number that ends it</h3>
+    <p><strong>Break-even entry is 1.40&times; the launch price. The observed median bundle entry is 1.379 to 1.416&times;.</strong> The seat is already bid to within about two percent of break-even.</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Where you get in</th><th class="n">Exit at 1s</th><th class="n">Exit at 3s</th><th class="n">Exit at 10s</th></tr></thead>
+        <tbody>
+          <tr><td>at the launch price &mdash; 0.1% of real buyers manage this</td><td class="n">+0.2998</td><td class="n">+0.3093</td><td class="n">+0.2938</td></tr>
+          <tr><td>1.2&times;</td><td class="n">+0.1284</td><td class="n">+0.1363</td><td class="n">+0.1229</td></tr>
+          <tr><td><strong>1.4&times; &mdash; where the market actually clears</strong></td><td class="n">+0.0040</td><td class="n">+0.0107</td><td class="n">&minus;0.0011</td></tr>
+          <tr><td><strong>1.6&times; &mdash; where a new entrant lands</strong></td><td class="n">&minus;0.0905</td><td class="n">&minus;0.0847</td><td class="n">&minus;0.0953</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>A new entrant is marginal by definition: you land behind the incumbents and lose 8.5%. And bundling every launch blindly is <strong>negative on the holdout</strong> &mdash; &minus;0.0087 on 08-16 against +0.0336 on 08-20, a gap that is pure selection, because 13.9% of 08-16 launches attracted a bundle against 30.5% on 08-20.</p>
+    <p><strong>This is where the whole day closes on itself.</strong> There is a real, robust, replicable edge at second zero, and it is almost exactly consumed by what the seat costs. The only version that pays is one that picks <em>which</em> launches to bundle &mdash; and that selector is precisely the thing twenty agents spent today failing to find.</p>
+    <p>I went looking for it anyway, inside the seat, on the 6,043 third-party second-zero positions that have a real observed fill price. Entry multiple is non-monotone. Creator history is non-monotone. <strong>One thing is clean and monotone: how many other wallets are in second zero with you</strong> &mdash; +9.6% alone, +12.2% with two or three, +27.0% with four to seven, <strong>+32.3% with eight or more</strong>, non-overlapping at the ends. And it is the single variable you cannot observe when you commit, because you submit into the launch block without seeing who else did. The only thing that selects within the seat is the number of other people taking the seat with you.</p>
+    <p style="margin-bottom:0"><strong>One tension I could not resolve in the time, and would rather name than bury.</strong> The 1.40&times; break-even above is a hypothetical &mdash; what a given entry price would return on the average coin. My own pass looks at wallets that <em>actually</em> filled at each multiple, and they do better: the 1.3 to 1.5&times; band returns +16% rather than break-even. Those answer different questions, and the agent&rsquo;s is the right one for a new entrant, who does not choose their multiple by choosing a coin &mdash; they get whatever the queue gives them. But the gap is large enough that anyone acting on this should re-derive it before believing either number. <em>(Mine is a quick pass: no null, no holdout split, more generous exit convention. Read the ordering, not the levels.)</em></p>
+  </div>
+
+  <div class="col">
+    <h3>2. It is a closed box, and only the fee is certain</h3>
+    <p>Three independent routes &mdash; summing trades, inverting the curve from price, and a token-side ledger &mdash; agree that money conserves inside the window to within 0.18% of gross inflow, and 98.93% of individual launches conserve to under 0.0001 SOL. Only 1.13% of launches ever escape to an outside market, and 72 of 85 of those were already finished at second three.</p>
+    <p>So before fees this is exactly zero-sum, and after fees it is negative-sum by the fee. That much is solid. <strong>Where it goes is not</strong>, and a completeness critic caught me asserting otherwise.</p>
+  </div>
+
+  <div class="box flag col">
+    <h3>I retracted this claim, and the retraction was wrong. Both corrections are worth reading.</h3>
+    <p>The published figure was <em>92.39 kept per 100 staked, of which 5.63 to the creator, 2.8&times; what the exchange takes</em>. A completeness critic pointed out it is a mark-to-model, and I agreed: recomputing with every unsold bag valued at zero, the creator&rsquo;s take came out at <strong>&minus;3.50 per 100</strong>, ROI &minus;14.01%, and I wrote that the claim was unsupported and straddled zero.</p>
+    <p><strong>That retraction was wrong, and an agent found exactly why.</strong> The entire negative comes from <strong>69 coins, 0.9% of the set</strong> &mdash; creators who staked 80 SOL or more:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Cohort</th><th class="n">n</th><th class="n">Staked</th><th class="n">Realised</th><th class="n">ROI</th></tr></thead>
+        <tbody>
+          <tr><td>creator staked &ge; 80 SOL</td><td class="n">69</td><td class="n">5,861.15</td><td class="n">&minus;5,861.15</td><td class="n">&minus;100.00%</td></tr>
+          <tr><td>everyone else</td><td class="n">7,690</td><td class="n">15,083.60</td><td class="n">+2,935.57</td><td class="n"><strong>+19.46%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>All 69 have <code>out</code> exactly zero, 67 of them are the coin&rsquo;s only wallet, and the median holding is exactly 1.0000&times; the real supply. <strong>They are the bundled instant graduations</strong> &mdash; one 85.0054 SOL trade at second zero that buys the whole curve. <strong>The total non-creator stake across all 69 is 4.22 SOL.</strong> A 5,861 SOL &ldquo;loss&rdquo; against a 4.22 SOL counterparty pool is not a transfer to anybody; it is an unpriced bag mislabelled as a realised loss, on coins whose tokens moved to a pool this corpus never saw.</p>
+    <p>My censoring premise was false too. I said most creators are still holding when the recorder stops. <strong>67.7% of them fully exit inside the window</strong>, and 81.4% of creator tokens are gone by second sixty.</p>
+    <p style="margin-bottom:0"><strong>The lesson is the sharpest of the day.</strong> Marking every unsold bag at zero felt like the conservative choice. It was not conservative &mdash; it was catastrophically wrong on 0.9% of coins that dominated the aggregate, and it flipped a headline. A conservative assumption is still an assumption, and it needs the same drop-test as a filter.</p>
+  </div>
+
+  <div class="box good col">
+    <h3>What the creator actually takes, with the bundlers held out</h3>
+    <p>The floor needs no valuation assumption at all: <strong>creators who fully exit inside sixty seconds &mdash; 68% of them, 84.6% of the staked SOL &mdash; make +39.69% on stake before fees and +37.06% after</strong>, mean +1.03 SOL per launch, 67.6% of them positive. That independently reproduces the earlier +39.2%.</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Assumption on the unsold bag</th><th class="n">ROI on own stake</th><th class="n">Per 100 non-creator SOL</th></tr></thead>
+        <tbody>
+          <tr><td>every unsold bag worth zero</td><td class="n">+14.82%</td><td class="n">+2.95</td></tr>
+          <tr><td>bags repriced at what the curve could pay</td><td class="n">+22.85%</td><td class="n">+4.54</td></tr>
+          <tr><td>&hellip;plus uncovered bags imputed</td><td class="n">+32.52%</td><td class="n">+6.46</td></tr>
+          <tr><td><em>marked at last price &mdash; arithmetically impossible, upper bound only</em></td><td class="n"><em>+54.50%</em></td><td class="n"><em>+10.83</em></td></tr>
+          <tr class="grad"><td><strong>pump.fun&rsquo;s fee, stable in every scenario</strong></td><td class="n">&mdash;</td><td class="n"><strong>1.99</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-bottom:0"><strong>The bracket does not cross zero: +2.95 to +6.46 per 100, against the exchange&rsquo;s 1.99 &mdash; between 1.5&times; and 3.2&times; the exchange&rsquo;s take.</strong> The original 5.63 sits near the top of that range rather than being wrong. And the two creator populations are different businesses: the dumpers are a low-concentration position that reaches 95% confidence of cumulative profit after just <strong>ten launches</strong>, while the holders are a lottery whose top 1% supplies 141% of the profit.</p>
+  </div>
+
+  <div class="col">
+    <h3>3. Every signal is real, and every one has the wrong sign</h3>
+    <p>This is the part that keeps catching people out, including me this morning. The filters work. They separate coins that move from coins that do not, by factors of ten and twenty-five, and they replicate out of sample. They simply have no idea which way the move goes, and the coins with the best signal dump the hardest.</p>
+    <ul>
+      <li>The best social bucket returns <strong>&minus;12.3%</strong>; buying every coin returns &minus;9.0%; the <em>worst</em> social bucket returns &minus;6.6%.</li>
+      <li>The wallet-graph shortlist separates 2&times; coins tenfold and returns &minus;8.06% against &minus;6.87% for buying blind.</li>
+      <li>Insider-flagged coins reach 2&times; at 6.5 times the base rate. Matched on busyness, the flag is worth <strong>&minus;3.8 percentage points</strong>.</li>
+      <li>More new buyers arriving after second 20 predicts a <em>lower</em> price, monotonically, out to twelve hours.</li>
+    </ul>
+    <p>Order flow predicts the peak at z = +10 to +15 and predicts the finish equally strongly in the other direction. You cannot short a bonding curve, so a working volatility detector converts into a coin flip, and the fee eats it.</p>
+    <p><strong>The sharpest version of this came from the agent that threw everything in at once</strong> &mdash; 184 features, three model families written from scratch, nested day-block cross-validation, ~4,400 configurations. Two of its models disagree in a way that explains the whole project:</p>
+    <ul>
+      <li>The <strong>ridge</strong>, targeting mean return, reaches Spearman <strong>+0.41</strong> by ranking <em>dead</em> coins highest. Its ceiling is &minus;3.6%: the cost of a round trip on a coin that never moves.</li>
+      <li>The <strong>logistic</strong>, targeting probability of profit, reaches <strong>AUC 0.77 to 0.90</strong> by ranking <em>live</em> coins highest. Those average &minus;12.8%.</li>
+      <li>A classifier trained directly on <em>&ldquo;will a +20% take-profit fill&rdquo;</em> reaches <strong>AUC 0.907</strong> and lifts the fill rate from 5.0% to 52%, a tenfold lift. It returns &minus;0.44%.</li>
+    </ul>
+    <p><strong>The models are not weak. They are strong on the wrong axis.</strong> Perfect foresight at the top 2% would return +166%; the combined model reaches &minus;1.0%, about <strong>4% of the distance from the base rate to the oracle</strong>.</p>
+    <p>The shape of the return distribution says why. My own pass, buying every clean coin at second three and holding to sixty, with each band&rsquo;s contribution to the overall mean:</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Net return band</th><th class="n">Coins</th><th class="n">Share</th><th class="n">Contribution to the mean</th></tr></thead>
+      <tbody>
+        <tr><td>worse than &minus;50%</td><td class="n">329</td><td class="n">6.5%</td><td class="n">&minus;3.86pp</td></tr>
+        <tr><td><strong>&minus;50% to &minus;10%</strong></td><td class="n">1,791</td><td class="n"><strong>35.5%</strong></td><td class="n"><strong>&minus;10.12pp</strong></td></tr>
+        <tr><td>&minus;10% to &minus;5%</td><td class="n">390</td><td class="n">7.7%</td><td class="n">&minus;0.57pp</td></tr>
+        <tr><td><strong>&minus;5% to &minus;1% &mdash; the fee floor</strong></td><td class="n">1,981</td><td class="n"><strong>39.3%</strong></td><td class="n">&minus;0.92pp</td></tr>
+        <tr><td>0% to +20%</td><td class="n">232</td><td class="n">4.6%</td><td class="n">+0.33pp</td></tr>
+        <tr><td>+20% to +100%</td><td class="n">174</td><td class="n">3.5%</td><td class="n">+1.68pp</td></tr>
+        <tr><td><strong>above +100%</strong></td><td class="n">83</td><td class="n">1.6%</td><td class="n"><strong>+3.79pp</strong></td></tr>
+        <tr class="grad"><td><strong>all</strong></td><td class="n">5,039</td><td class="n">100%</td><td class="n"><strong>&minus;9.69pp</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box good col">
+    <h3>One mechanism the statistics could not see &mdash; and a later audit took it away</h3>
+    <p>Two thousand statistical tests, and nobody had opened the individual coins that went up. An agent read the top forty one at a time. They fall into two visibly different kinds &mdash; ones that were already moving at second three and kept going, and ones that <strong>sat dead flat and were then detonated</strong>.</p>
+    <p>MEMETIC traded between 1.0 and 1.3&times; its launch price for <strong>fifty-four seconds</strong>. Then at <code>at = 54.34</code> and <code>54.35</code>, twenty fresh wallets each bought 1.9 to 2.8 SOL, one transaction each, and it closed the minute at <strong>14.26&times;</strong>. Kindia sat at 1.01&times; until second 54; at <code>56.24</code>/<code>56.25</code> twenty fresh wallets put in 2.0 to 2.9 SOL each &mdash; fifty SOL in a single second &mdash; and it went to 7.16&times;. Six of Kindia&rsquo;s twenty wallets had done the same thing to another coin thirty-five seconds into its life earlier that day.</p>
+    <p>Formalised as <em>eight or more wallets first appearing in the same ten-millisecond tick after second ten, each buying half a SOL or more and never selling</em>:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>The late fresh swarm</th><th class="n">Count</th><th class="n">Base rate</th></tr></thead>
+        <tbody>
+          <tr><td>clean coins in the whole corpus</td><td class="n">6 of 12,089</td><td class="n">0.08%</td></tr>
+          <tr><td>of those, reached 2&times;</td><td class="n"><strong>5 of 6 &mdash; 83%</strong></td><td class="n">3.77%</td></tr>
+          <tr><td>of those, reached 5&times;</td><td class="n"><strong>4 of 6 &mdash; 67%</strong></td><td class="n">0.36%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>And then it was retracted.</strong> The final audit found a sixty-second lookahead sitting in the definition &mdash; &ldquo;never sold in the window&rdquo; is not knowable when the swarm lands &mdash; and, worse, that the coordination does no work at all. The control nobody had run is simply <em>twenty or more SOL arriving in a single second after second ten</em>: <strong>139 coins, 43.2% of which reach 2&times;</strong> against a 3.68% base. Split those by how many wallets arrived in that second and it is <strong>38.5% / 61.5% / 43.2%</strong> &mdash; flat and non-monotone. <strong>It is the SOL, not the swarm.</strong></p>
+    <p style="margin-bottom:0">The honest 139-coin population loses at every latency and horizon, medians pinned at the fee floor. And &ldquo;five of six reached 2&times; against a 3.77% base&rdquo; turns out to be a tautology: in four of the five, the price was <em>already</em> above 2&times; at the close of the swarm&rsquo;s own second. <strong>I promoted this as the day&rsquo;s one genuinely new mechanism and it was not one.</strong> What survives is the 139-coin control, as a clean negative.</p>
+  </div>
+
+  <div class="col">
+    <h3>And one genuinely new shape: too much early volume is as bad as too little</h3>
+    <p>The same pass found that the relationship between three-second volume and outcome is an <strong>inverted U</strong>, which nobody had noticed because every model fit it as a monotone feature. Rate of reaching 2&times;, by SOL through the curve in the first three seconds:</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>SOL through the curve by second 3</th><th class="n">&lt;1</th><th class="n">10&ndash;15</th><th class="n">20&ndash;30</th><th class="n">30&ndash;50</th><th class="n">50+</th></tr></thead>
+      <tbody>
+        <tr><td>reached 2&times;</td><td class="n">0.36%</td><td class="n">4.51%</td><td class="n"><strong>17.03%</strong></td><td class="n">11.05%</td><td class="n"><strong>1.61%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p>The busiest bucket is <em>worse than a coin with three to six SOL</em>. And the biggest losers have the same signature as the biggest winners: of the forty worst coins, 39 had 25+ SOL in the first three seconds and 35 were already 3&times; at second three. The drop-test kills it as a filter &mdash; refusing them removes a set whose 2&times; rate is 9.19% against 3.42% for what you keep. <strong>The loser signature and the winner signature are the same coins.</strong></p>
+    <p style="margin-bottom:0"><strong>9.7% of coins finish above water and contribute +5.80 points; everything else contributes &minus;15.49.</strong> Two masses do the damage and they are different problems. Nearly 40% of coins land within a few points of the fee floor &mdash; those never move and you just pay the toll. But <strong>another 35.5% lose between ten and fifty percent</strong>, and that band alone is &minus;10.12 points of the &minus;9.69 total. It is not merely that most coins do nothing. It is that a third of them actively bleed, and the 1.6% that go above +100% cannot carry them.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">What works</span>Two detectors, no model, no training</h2>
+  <p class="sub">Both are available at the three-second decision point. Neither is fitted. One is a law of the curve; the other is a running count.</p>
+
+  <div class="box good">
+    <h3>The curve identity catches manufactured volume with no wallet list at all</h3>
+    <p>Every pump trade event must satisfy the constant product <code>vsol &times; vtok = k</code>. Across 21 months of full-block history:</p>
+    <pre><code>2024-10 .. 2025-11    77,305 trades      0 violations
+2026-02-18            13,483 trades    132 violations   122 of them one operator
+2026-08-19            14,152 trades    169 violations   140 of them the same operator</code></pre>
+    <p>Not one violation in 77,305 trades, then it breaks. Remove that operator and the maximum peak multiple in the entire history corpus becomes exactly <strong>14.70&times;</strong> &mdash; the true completion multiple of the curve. Nothing legitimate has ever exceeded it.</p>
+    <p style="margin-bottom:0">On the live captures the same phenomenon is caught by an equivalent rule &mdash; any printed price below the coin&rsquo;s own launch price, a physical impossibility &mdash; at <strong>100% precision with zero false positives</strong> in 6,032 clean coins, holding at 100% on the 08-16 holdout. That account touches 14.9% of the corpus, <strong>53.7% of every coin reaching 2&times;</strong> and 69.9% of every coin reaching 5&times; &mdash; both figures reproduced independently.</p>
+  </div>
+
+  <div class="box flag">
+    <h3>A creator&rsquo;s history predicts their next rug &mdash; at 0.82, not the 0.94 first reported</h3>
+    <p>This was the headline of the morning until a red-team agent was sent to refute it, and refute it is what happened. I include the whole episode because the correction is more useful than the claim was.</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Measure</th><th class="n">As first reported</th><th class="n">Strict re-derivation</th></tr></thead>
+        <tbody>
+          <tr><td>AUC, 08-16 holdout</td><td class="n">0.9386</td><td class="n"><strong>0.8215</strong> &nbsp;CI [0.745, 0.864]</td></tr>
+          <tr><td>AUC, development days</td><td class="n">0.9153</td><td class="n">0.8589</td></tr>
+          <tr><td>&ldquo;never dumped before&rdquo; &rarr; dumps</td><td class="n">5.4%</td><td class="n"><strong>25.2%</strong></td></tr>
+          <tr><td>launches scoreable at all</td><td class="n">&mdash;</td><td class="n">46.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>The 0.9386 is reproduced to four decimals by computing a creator&rsquo;s dump rate over all their coins including the one being scored.</strong> That is a self-inclusive feature, and it has a mechanism: of 7,551 consecutive same-creator launch pairs, <strong>45% are less than sixty seconds apart</strong> &mdash; inside the recorder&rsquo;s own observation window, so the previous coin&rsquo;s outcome had not finished being recorded. The tenth percentile of that gap is two milliseconds.</p>
+    <p><strong>And then the control that settles it.</strong> Run the identical estimator, within a single day, on attributes that carry no behaviour at all:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Predicted from the creator&rsquo;s prior rate</th><th class="n">08-11</th><th class="n">08-16</th><th class="n">08-20</th><th class="n">08-21</th></tr></thead>
+        <tbody>
+          <tr><td><strong>whether they dump &mdash; the claim</strong></td><td class="n">0.858</td><td class="n">0.821</td><td class="n">0.872</td><td class="n">0.812</td></tr>
+          <tr><td>whether the recorder wrote a <code>tin</code> field</td><td class="n">&mdash;</td><td class="n">0.861</td><td class="n"><strong>0.976</strong></td><td class="n">0.961</td></tr>
+          <tr><td>whether the creator appears in <code>who[]</code> at all</td><td class="n">0.984</td><td class="n">0.963</td><td class="n">0.952</td><td class="n">0.948</td></tr>
+          <tr><td>whether the coin ever traded</td><td class="n">0.889</td><td class="n">0.911</td><td class="n">0.907</td><td class="n">0.896</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-bottom:0">Ambient within-creator autocorrelation for meaningless attributes runs 0.89 to 0.98, and <strong>the dump signal sits below it on every day</strong>. Calling it the strongest signal in the corpus was backwards. What honestly survives: <strong>AUC ~0.82 on 46.9% of launches, worth at most a 1.27&times; precision lift over a 71% base rate</strong> &mdash; real, not null, separating already at one prior coin (85.1% against 25.4%), and modest.</p>
+  </div>
+
+  <div class="box flag col">
+    <h3>The awkward part, which decides what any of this is for</h3>
+    <p>Even taken at its strongest, knowing a creator will not rug does not give you anywhere better to put the money. Coins by creators who have never dumped are the <em>dead</em> ones &mdash; 1.4 SOL of outside money each against 16.1 for the repeat dumpers &mdash; and buying them loses as much. The red team confirmed the trading side by its own route and found it worse than first reported: on the holdout, buying everything returns &minus;10.48%, and filtering to <em>&ldquo;the creator has not sold by second three&rdquo;</em> returns <strong>&minus;16.42%</strong>.</p>
+    <p style="margin-bottom:0"><strong>You lose either way. The rug is not what takes your money; the fee and the exit liquidity are.</strong> So this is not an edge for the person holding it, and the honest framing of the whole deliverable is a warning label for other people.</p>
+  </div>
+
+  <div class="stats">
+    <div><span class="big">35.9%</span><span class="lbl">of launches the two rules flag</span></div>
+    <div><span class="big">52.3%</span><span class="lbl">of all non-creator money flows into those</span></div>
+    <div><span class="big">46.9%</span><span class="lbl">of launches scoreable by creator history</span></div>
+    <div><span class="big pos">100%</span><span class="lbl">precision of the manipulation rule on the holdout</span></div>
+  </div>
+
+  <div class="box good col">
+    <h3>A third thing works, and it is worth naming separately: refusing the worst coins</h3>
+    <p>The ensemble agent found one result that replicates cleanly out of sample and survives every correction it applied. Keeping only the top half of coins by model score:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th></th><th class="n">Out of fold</th><th class="n">08-16 holdout</th></tr></thead>
+        <tbody>
+          <tr><td>buy blind, hold to the end</td><td class="n">&minus;7.68%</td><td class="n">&minus;7.62%</td></tr>
+          <tr><td><strong>keep the top half by score</strong></td><td class="n"><strong>&minus;3.63%</strong></td><td class="n"><strong>&minus;3.34%</strong></td></tr>
+          <tr><td>the half it refuses</td><td class="n">&minus;11.75%</td><td class="n">&minus;11.90%</td></tr>
+          <tr class="grad"><td><strong>gain</strong></td><td class="n"><strong>+4.05pp</strong></td><td class="n"><strong>+4.28pp</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-bottom:0">The two numbers agree within 0.23 points, it sits at z = +6.89 against a shuffled null, and it clears a Bonferroni threshold of 4.24 with room. <strong>It is worth about four points to somebody already buying, and nothing at all to somebody who is not</strong> &mdash; because it never crosses zero. That is the cleanest example in this whole document of a real, replicating, well-controlled result that is still not a reason to trade.</p>
+  </div>
+
+  <div class="col">
+    <h3>The spec, written and run end to end</h3>
+    <p>So that this is a thing and not a finding, I implemented both rules cleanly and ran them over the whole corpus. One file, no dependencies, one free parameter in the whole system.</p>
+  </div>
+
+  <pre><code><strong>Rule M &mdash; manufactured volume.</strong> A bonding curve is x*y=k, so a trade can move
+the price along the curve but cannot take it below the price the curve opened
+at: that needs a negative real reserve. Fire if any printed price in the first
+3 seconds is below the coin's own launch price. In a live trade stream, check
+the constant product directly instead: vsol*vtok must equal k.
+
+<strong>Rule R &mdash; repeat rugger.</strong> The creator's own prior launches, counting only
+those whose 60-second window closed before this coin launched. Fire if their
+dump rate is at or above 0.67. This threshold is the only fitted number here.</code></pre>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Day</th><th class="n">Coins</th><th class="n">Rule M</th><th class="n">Rule R</th><th class="n">Either</th><th class="n">% of launches</th><th class="n">% of money</th></tr></thead>
+      <tbody>
+        <tr><td>08-10 &ndash; 08-12 <span class="note">no candles recorded, so M is structurally silent</span></td><td class="n">3,056</td><td class="n">0</td><td class="n">792</td><td class="n">792</td><td class="n">25.9%</td><td class="n">41.5%</td></tr>
+        <tr><td>08-15</td><td class="n">152</td><td class="n">6</td><td class="n">29</td><td class="n">34</td><td class="n">22.4%</td><td class="n">28.9%</td></tr>
+        <tr><td>08-16 <span class="note">the holdout</span></td><td class="n">1,822</td><td class="n">269</td><td class="n">563</td><td class="n">680</td><td class="n">37.3%</td><td class="n">47.4%</td></tr>
+        <tr><td>08-20</td><td class="n">5,397</td><td class="n">299</td><td class="n">2,064</td><td class="n">2,189</td><td class="n">40.6%</td><td class="n">59.6%</td></tr>
+        <tr><td>08-21</td><td class="n">1,662</td><td class="n">174</td><td class="n">559</td><td class="n">668</td><td class="n">40.2%</td><td class="n">50.4%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p>Coverage climbs as the creator history warms up. <strong>In steady state the pair flags about 40% of launches and 50 to 60% of the money.</strong> Against the label it predicts, rule R runs at 91.5% precision and 87.7% recall &mdash; but on a base rate of 74.7%, so the honest way to state that is a <strong>1.22&times; lift</strong>, not a 91% accuracy. Rule M has no such caveat and no false positive anywhere in the corpus.</p>
+  </div>
+
+  <div class="col">
+    <p>One caveat that has to travel with those four numbers. The <strong>strong</strong> detector &mdash; the curve identity, 100% precision, no false positives &mdash; flags 6.2% of launches but only <strong>2.2% of the money</strong>, because flagged coins draw about 10&times; less real capital than their trade counts suggest (a first pass said 27&times;; a red team put it at 10&times;). Almost all of the money coverage comes from the <em>weaker</em> creator-history rule. The certainty and the reach are in different rules, and a product has to say so.</p>
+  </div>
+</section>
+
+<section class="col">
+  <h2><span class="num">What I&rsquo;d do</span>The recommendation</h2>
+  <p><strong>Stop looking for the buy-side trade.</strong> Thirty-one agents, four waves, and three of the loudest claims retracted by the last, every family of idea I could construct, and the closest anything came to break-even was a rule that beat a stopwatch and lost to doing nothing. That negative is no longer a failure of effort or imagination; it is a property of a closed box with a fee in it.</p>
+  <p><strong>On the two positions that do pay.</strong> The creator side is real and the arithmetic is not in doubt, and the specific cohort that earns it is the two-thirds who sell their whole holding on their own buyers inside sixty seconds. That is the rug, and I am not going to help build it &mdash; trading around ruggers is one thing, being one is another. I have measured it because the question was whether an edge exists, and the honest answer to that question includes this.</p>
+  <p><strong>The bundle seat is the more interesting no.</strong> It is a genuine, replicable, well-controlled edge, the seat is open, and it is already bid to within two percent of break-even by people who got there first. Buying in blind is negative on the holdout. It would only pay with a rule for choosing which launches to bundle &mdash; which is the same selector that failed nineteen different ways this morning.</p>
+
+  <div class="box flag">
+    <h3>There was one open thread. It closed while I was writing.</h3>
+    <p>If the thing that pays inside the seat is how many others are in it with you, the next question is whether <em>that</em> is predictable before the block. It is. Bundle size has clean 5&times; to 12&times; gradients on three things you know at launch:</p>
+    <ul style="margin-bottom:12px">
+      <li><strong>Tweet age</strong> &mdash; under 15 seconds old gives a mean bundle of 1.57 and a 12.2% chance of four or more wallets; over five minutes gives 0.29 and 2.2%.</li>
+      <li><strong>Tweet reuse</strong> &mdash; the first coin on a tweet gives 1.38 and 10.8%; the eleventh or later gives 0.15 and 0.9%.</li>
+      <li><strong>The creator&rsquo;s own initial buy</strong> &mdash; under 0.01 SOL gives 0.16 and 1.3%; half a SOL or more gives 1.61 and <strong>13.0%</strong>.</li>
+    </ul>
+    <p>Follower count and account age are flat, which is itself a good sign that this is not just &ldquo;popular tweet&rdquo; leaking through.</p>
+    <p style="margin-bottom:0">I sent an agent at it with the same rigour as everything else. <strong>The selector is real, and it still does not pay.</strong> It closes below.</p>
+  </div>
+
+  <div class="box flag">
+    <h3>The last thread, closed</h3>
+    <p>Stage one confirms out of sample: a model on those pre-launch features predicts bundle size at <strong>Spearman 0.51</strong> on the holdout, scored once. Stage two survives the hardest test I could specify &mdash; held within fill-multiple strata, the score still adds <strong>+0.052 per SOL</strong> [+0.010, +0.096], p = 0.009. The lead genuinely does not die at the fill.</p>
+    <p><strong>It dies on the geometry instead.</strong> The seat&rsquo;s value decays hard by position in the block, and the selector pushes you further back in it &mdash; it moves the target and the price by nearly the same amount, and the price moves further:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Your position in the launch block</th><th class="n">Slot 0&ndash;1</th><th class="n">2</th><th class="n">3</th><th class="n">4</th><th class="n">5</th><th class="n">Behind everyone</th></tr></thead>
+        <tbody>
+          <tr><td>net per SOL</td><td class="n">+0.358</td><td class="n">+0.249</td><td class="n">+0.175</td><td class="n">+0.117</td><td class="n">+0.058</td><td class="n"><strong>&minus;0.067</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Using the selector lifts break-even entry from 1.26&times; to <strong>1.53&times;</strong> &mdash; about 0.27&times; of headroom bought. It also pushes your own honest entry from 1.677&times; to <strong>1.868&times;</strong>. You end up further above the bar than you started.</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Priced at the fill you would actually get</th><th class="n">Median fill in the bundle</th><th class="n">Worst fill in it</th><th class="n">One slot behind it</th></tr></thead>
+        <tbody>
+          <tr><td>development days, net per trade</td><td class="n">+0.2296</td><td class="n">+0.1518</td><td class="n"><strong>&minus;0.0486</strong></td></tr>
+          <tr><td><strong>08-16 holdout, net per trade</strong></td><td class="n">+0.2108</td><td class="n">+0.1770</td><td class="n"><strong>&minus;0.0583</strong></td></tr>
+          <tr class="grad"><td>matched-exposure p</td><td class="n">0.0008</td><td class="n">0.0044</td><td class="n"><strong>0.709</strong></td></tr>
+          <tr class="grad"><td>shuffled null, out of 2,000 draws</td><td class="n">2</td><td class="n">17</td><td class="n"><strong>1,527</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>And a later agent asked the obvious follow-up: can you simply get further forward in the block?</strong> It reconstructed exact block position from each wallet&rsquo;s fill (the chain closes to a median error of 0.0003 SOL) and found that <strong>early position is genuinely a capability</strong> &mdash; independent operator teams hold their position across launches at rho +0.82, replicating on the holdout at +0.58. It nearly proved it too well: the naive wallet-level figure is +0.88 to +0.95, and that turns out to be <em>fixed teams with a frozen instruction order inside one submitter&rsquo;s own bundle</em>, not a contest. One wallet has a position standard deviation of <strong>0.000 across 36 coins</strong>.</p>
+    <p><strong>The route in was supposed to be the tweet</strong>, which exists a median 116 seconds before the coin. It does not work, and it fails one step earlier than expected:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Tweet lead at launch</th><th class="n">Median second-zero bundle</th><th class="n">Slot-2 net per SOL</th></tr></thead>
+        <tbody>
+          <tr><td>no readable tweet (47% of launches)</td><td class="n">&mdash;</td><td class="n">+0.374</td></tr>
+          <tr><td>0&ndash;10 s</td><td class="n">4.70 SOL</td><td class="n">+0.166</td></tr>
+          <tr><td>30&ndash;60 s</td><td class="n">&mdash;</td><td class="n">+0.060</td></tr>
+          <tr><td><strong>60&ndash;300 s</strong></td><td class="n"><strong>0.00 SOL</strong></td><td class="n"><strong>&minus;0.060</strong></td></tr>
+          <tr><td>over an hour</td><td class="n">0.00 SOL</td><td class="n">+0.040</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Longer lead means a deader coin.</strong> Spearman between lead and second-zero bundle size is &minus;0.335 (z = &minus;26.6); between lead and total inflow, &minus;0.403. On coins with a minute or more of warning, slot 2 is &minus;0.026 per SOL with an interval crossing zero &mdash; and the persistently-early operators are on <em>fresher</em> tweets than everyone else, not older ones (median lead 26 s against a 112 s baseline, pooled correlation +0.0000). <strong>Nobody is cashing a tweet watch.</strong> Of 12,089 launches, only <strong>516 &mdash; 4.3% &mdash; have both a minute of lead and a bundle worth being early to.</strong></p>
+    <p>Two more things bound it. <strong>Size buys position and small size cannot</strong>: buys under 0.05 SOL land dead last 66% of the time, so at the size this project has been costing you cannot buy up the block at all. And <strong>slot 0 is the creator&rsquo;s own mint buy</strong> on 97.1% of coins, so slot 1 is the first outsider seat.</p>
+    <p style="margin-bottom:0"><strong>Every attack agrees on where the line falls, and it falls between the last incumbent and you.</strong> +0.152 per trade at the last incumbent&rsquo;s price, &minus;0.049 one slot later. Negative at every threshold on both dev and holdout; drop the best three coins and it goes to &minus;0.062; negative at every hold length from one second to sixty. The whole edge lives in a single block position, and a new entrant does not get it. And the agent&rsquo;s own caveat is worth keeping: its <em>behind</em> case uses the more favourable of two available curve-state definitions, so <strong>the negative verdict is the conservative one</strong>.</p>
+  </div>
+  <p><strong>That was the last candidate on the entry-signal side</strong>, it got a full test, and it failed at the one place a new entrant actually stands.</p>
+
+  <div class="box flag">
+    <h3>And then a final audit found the biggest error of the day &mdash; in the seat itself</h3>
+    <p>The first twenty agents were red-teamed twice. Waves two and three were not, and they produced the loudest claims. So I sent a critic at the whole thing, and it found something none of the twenty-eight had:</p>
+    <p><strong>The seat was priced one wallet at a time, as if the rest of the bundle stands still.</strong> It does not. The second-zero cohort <em>is</em> the reserve it would sell into &mdash; their own stake is a <strong>median 58.5% of the entire real reserve at second three</strong>, and above half on 59.7% of coins. On a constant-product curve the total a cohort can extract is fixed and order-independent, so this is arithmetic, not a scenario. Priced as one book:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Second-zero third parties, n = 6,023</th><th class="n">Mean</th><th class="n">Median</th><th class="n">Win rate</th></tr></thead>
+        <tbody>
+          <tr><td>each wallet exits <strong>alone</strong> &mdash; how it was priced</td><td class="n">+19.54%</td><td class="n">+5.90%</td><td class="n">59.1%</td></tr>
+          <tr class="grad"><td>the whole cohort exits <strong>together</strong> &mdash; what it is</td><td class="n"><strong>+1.86%</strong></td><td class="n"><strong>&minus;2.46%</strong></td><td class="n">42.7%</td></tr>
+          <tr><td>&hellip;on 08-16, the holdout</td><td class="n"><strong>&minus;3.40%</strong></td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+          <tr><td>&hellip;restricted to wallets that actually sold</td><td class="n">&minus;0.59%</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>The decision for a new entrant is unchanged</strong> &mdash; the behind-everyone case was already &minus;0.049. <strong>What changes is every magnitude on this page.</strong> &ldquo;+0.358 at slot 0&ndash;1, a swing larger than anything else in this project&rdquo; is a marginal price. The story was that the seat&rsquo;s value is consumed <em>at entry</em> by the 1.40&times; clearing price; in fact about ninety percent of it is consumed <em>at exit</em>, before entry is considered at all.</p>
+    <p style="margin-bottom:0"><strong>And the method behind it is the one thing twenty-eight agents never applied: capacity accounting.</strong> Every result priced a per-trade expectation; not one asked what a position is worth when everyone holding it acts. The reversibility result &mdash; round trip at an unchanged reserve is exactly zero at any size &mdash; was allowed to close the subject, and it does not: reversibility is about <em>your</em> size at an <em>unchanged</em> reserve, and the seat&rsquo;s problem is that the reserve does not stay unchanged when your cohort leaves.</p>
+  </div>
+
+  <div class="box flag">
+    <h3>Three more corrections from the same audit</h3>
+    <p><strong>The late fresh swarm is decoration and I should have caught it.</strong> Its definition contains a sixty-second lookahead &mdash; &ldquo;never sold in the window&rdquo; is not knowable when the swarm lands. And the coordination does nothing: the control nobody ran is simply <em>20+ SOL in a single second after second 10</em>, which gives <strong>139 coins reaching 2&times; at 43.2%</strong> against a 3.68% base, and splitting those by wallet count gives <strong>38.5% / 61.5% / 43.2%</strong> &mdash; flat and non-monotone. <strong>It is the SOL, not the swarm.</strong> The honest 139-coin population loses at every latency, and &ldquo;5 of 6 reached 2&times;&rdquo; is a tautology: in four of the five the price was already above 2&times; at the close of the swarm&rsquo;s own second.</p>
+    <p><strong>&ldquo;The fee is the entire story&rdquo; is true of the median and false of the mean.</strong> Blind buying is <strong>&minus;6.58% gross</strong> with a median of &minus;0.26%. On the median coin the fee is everything; on the mean, the market takes 6.6 points <em>before any cost exists</em>. That matters, because it closes the obvious rebuttal: a fee rebate does not turn this positive. And there is no escape hatch &mdash; of 11,112 trades carrying a fee field, the <strong>1,704 that pay exactly zero all belong to the fabricating account</strong>.</p>
+    <p style="margin-bottom:0"><strong>&ldquo;The real holdout&rdquo; is a single 89-minute session.</strong> 08-16 runs 20:57 to 22:26 UTC, continuous, 1,393 clean coins. Every &ldquo;it replicates on the holdout&rdquo; on this page is a replication on <em>one Saturday evening</em>. That is harmless for the thirty negative results &mdash; reusing a holdout inflates false positives, not false negatives &mdash; but it is the only out-of-sample evidence behind every surviving positive, and this page has been treating it as a week.</p>
+  </div>
+
+  <div class="box flag">
+    <h3>Finally, in SOL rather than percent &mdash; and that changes what both survivors are</h3>
+    <p>Percentages carried this entire report, and percentages are what let the seat look ten times bigger than it was. The last agent priced the two remaining positions as books, in absolute terms. It also found that the rule-miner&rsquo;s impact model was <strong>wrong-signed</strong> &mdash; it displaced the exit reserve multiplicatively, which credits your own buy with cushioning your own crash, so bigger size looked <em>cheaper</em>. Corrected, it returns exactly the &minus;2.110975% fee floor at any size when the reserve is unchanged.</p>
+
+    <p><strong>The avoidance stack &mdash; the most durable result in the sweep &mdash; has a capacity of about 0.02 SOL per coin, and that is the finding rather than a caveat.</strong> Its strongest rule refuses coins that already pumped, so it retains the illiquid half <em>by construction</em>: median retained reserve is <strong>0.200 SOL</strong> against 5.393 for what it refuses. And a coin with reserve R cannot fall further than <code>(30/(30+R))&sup2; &minus; 1</code>, so <strong>the median retained coin physically cannot lose more than 1.32%</strong>. The filter buys things too empty to move and pockets the gap between that and the 2.111% fee.</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Position size</th><th class="n">Retained</th><th class="n">Blind</th><th class="n">SOL / hour</th><th class="n">Capital</th></tr></thead>
+        <tbody>
+          <tr><td>0.05 SOL</td><td class="n">&minus;2.430%</td><td class="n">&minus;7.754%</td><td class="n"><strong>&minus;0.42</strong></td><td class="n">0.6</td></tr>
+          <tr><td>1 SOL</td><td class="n">&minus;2.618%</td><td class="n">&minus;8.102%</td><td class="n">&minus;8.96</td><td class="n">11</td></tr>
+          <tr><td>20 SOL</td><td class="n">&minus;4.769%</td><td class="n">&minus;12.305%</td><td class="n"><strong>&minus;326.4</strong></td><td class="n">220</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Your own order manufactures your downside: buy 20 SOL into a 0.200 SOL reserve and that &minus;1.32% floor becomes <strong>&minus;64.01%</strong>. And it does survive being shared &mdash; at twenty traders the cohort is a median 83.3% of the reserve, past the 58.5% that killed the seat, and loses only 0.19 points. It survives for a damning reason: <strong>these coins are too empty to have a price</strong>, so the round trip collapses onto the fee floor. 38.6% of the retained book returns that floor to within one part in a million. <strong>Sharing it converges it to a pure transfer to pump.fun.</strong></p>
+
+    <p style="margin-bottom:0"><strong>And the creator position, the one thing that robustly pays, is small.</strong> Non-creator money walks in at <strong>3,204 SOL an hour</strong>; the creators take <strong>2 to 4% of it</strong> &mdash; about what the exchange takes in fees for the same flow. All 1,343 of them together earn <strong>+128 SOL an hour</strong>. <strong>The median creator in that cohort makes 0.17 SOL in total, off one launch</strong>, and the busiest operator anyone observed in thirty recorded hours managed <strong>+8.92 SOL an hour</strong>. It is capped by buyers, not capital: profit tracks arriving money at rho +0.857 against +0.611 for the creator&rsquo;s own stake, and <strong>21.3% of launches earn exactly zero because nobody shows up</strong>. It does not saturate &mdash; but it does not scale on capital either.</p>
+  </div>
+
+  <div class="box good">
+    <h3>Where this actually ends</h3>
+    <p>I closed this sweep three times and was wrong twice. What finally closed it was not another test coming back negative &mdash; it was running out of <em>methods</em>. Twenty agents fitted models. Five applied different lenses. Three applied the last ones I could name: an exhaustive rule search that beats any model at finding pockets, a direct map of the exit window, and simply reading the files nobody had opened.</p>
+    <p>I closed on a statistic here &mdash; that the real corpus produced fewer profitable-looking rules than a shuffled one &mdash; and <strong>a red team withdrew it.</strong> An independent miner with its own feature set got the opposite sign, and the null it sits in spans a median of 6 and a maximum of 1,722. It has no resolving power. The verdict it decorated still stands on the sensitivity ladder: as the support threshold rises the best rule becomes <em>statistically significant</em> and <em>simultaneously worthless</em> &mdash; +0.43% at p&nbsp;=&nbsp;0.001, then &minus;0.29% at p&nbsp;=&nbsp;0.0005. Real, replicable, and 2.4 points short.</p>
+    <p style="margin-bottom:0">And the last audit is the reason to trust that. It was pointed at the least-checked and loudest claims, and it found the biggest error of the day in the largest positive number on this page, retracted a mechanism I had promoted, and named a method &mdash; capacity accounting &mdash; that none of twenty-eight agents had applied. <strong>The right time to stop is when the checking stops finding things. It did not, so I kept going.</strong></p>
+  </div>
+
+  <div class="box flag">
+    <h3>I said &ldquo;nothing left untested&rdquo; too early. Five things were &mdash; all five now answered.</h3>
+    <p>Every one of the twenty agents worked the same way: build per-coin features, fit, score a slice, test against a null. That is one method applied twenty times, and saying it exhausts the space was overreach. Five genuinely different angles were still open. All five came back, and every one is negative &mdash; but two of them found things the first twenty could not have:</p>
+    <ul style="margin-bottom:12px">
+      <li><strong>Forward position in the block &mdash; answered.</strong> It <em>is</em> a capability, not a lottery: independent operator teams hold their position across launches at rho +0.82, replicating on the holdout at +0.58. But <strong>it is bought with size and reaction speed, not with tweet lead</strong> &mdash; and on the launches where a lead exists there is no bundle left to be early to. Detail below.</li>
+      <li><strong>The other side of the trade &mdash; answered, and it is no.</strong> <strong>There is no mean reversion in this market at any horizon from three seconds to twelve hours.</strong> Of 312 matrix cells, eight have a positive mean and none clears the fee. The shape is the <em>opposite</em> of reversion: the flat bucket is the best cell in every panel and both tails are worse. Coins that fell hardest do not bounce &mdash; they keep falling, just more slowly. Detail below.</li>
+      <li><strong>Twelve hours &mdash; negative. After graduation &mdash; unanswerable.</strong> Of 1,468 hypotheses at the twelve-hour horizon none survives correction, and the best gross edge anywhere is a third of the fee. The post-migration price is <em>simply not in this corpus</em>: a grep across every capture file returns zero hits for the venue. Detail below.</li>
+      <li><strong>Reading the winners one at a time &mdash; and it found something.</strong> A <strong>late fresh swarm</strong>: eight or more wallets first appearing in the same 10 ms tick after second 10, each buying half a SOL or more and never selling. <strong>Six coins in 12,089. Five reached 2&times;, four reached 5&times;.</strong> Invisible to every regression run today. It is also a sub-second latency problem, not a prediction problem. Detail below.</li>
+      <li><strong>The wallet graph and market regime &mdash; both answered, both no.</strong> The network is genuinely real: 120 communities, structure far above a degree-preserving null, membership persisting nine days. It pays nothing once you control for how many repeat wallets showed up &mdash; a community whose coins reach 2&times; at 13.5% against a 5.4% base has a stratum-adjusted p of <strong>0.86</strong>. And no time cell crosses zero: every spread sits inside its own shuffle.</li>
+    </ul>
+    <p style="margin-bottom:0"><strong>&ldquo;I tested one method exhaustively&rdquo; is not the same claim as &ldquo;there is no edge&rdquo;</strong>, and this page was making the second on the strength of the first. The second wave cost about an hour and produced the day&rsquo;s only genuinely new mechanism, a fourth data trap nobody had found, and the retraction of a number I had repeated from the critic without checking it.</p>
+  </div>
+
+  <div class="box flag">
+    <h3>The last method: 4.6 million rules, and the corpus is worse than chance</h3>
+    <p>Everything above fits models. A model optimises a global objective and will happily average over a small, sharply-defined pocket of positive expectancy; <strong>rule mining looks for the pocket directly.</strong> That gap got closed with a C search engine over the full conjunction space to depth four &mdash; <strong>4,616,401 rules</strong>, 131,833 of them with enough support to score.</p>
+    <p>The best rule returns +7.83% on the training days. Then the entire 131,833-rule search was <strong>re-run on 2,000 shuffled datasets</strong>, recording the best rule each time:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Best rule found</th><th class="n">Return</th></tr></thead>
+        <tbody>
+          <tr><td>in the real data</td><td class="n">+7.83%</td></tr>
+          <tr><td>median shuffle</td><td class="n">+7.13%</td></tr>
+          <tr><td>95th percentile shuffle</td><td class="n">+11.23%</td></tr>
+          <tr><td>best shuffle of 2,000</td><td class="n">+16.91%</td></tr>
+          <tr class="grad"><td><strong>shuffles that beat the real data</strong></td><td class="n"><strong>751 of 2,000 &nbsp; p = 0.38</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>The best rule the real corpus can produce is statistically indistinguishable from what shuffled noise produces</strong> &mdash; 751 of 2,000 shuffles beat it outright. (An earlier draft of this page said it sat <em>below</em> the shuffle median; that was wrong, and a red team caught it. It is slightly above.) It also rests on one coin &mdash; 92.9% of its members lose money, and removing the single best takes it from +7.83% to &minus;0.08%. On a frozen holdout it scores <strong>&minus;2.20%</strong> [&minus;3.24, &minus;1.17], which is properly powered and excludes break-even decisively.</p>
+    <p><em>An earlier version of this page made a second claim here &mdash; that the real corpus produces fewer profitable-looking rules than chance. An independent replication got the opposite sign on a null spanning a median of 6 and a max of 1,722, so the statistic has no resolving power and it is withdrawn.</em></p>
+    <p style="margin-bottom:0">The sensitivity ladder says the rest. As the support threshold rises, the best rule becomes <em>statistically significant</em> and <em>simultaneously worthless</em>: at 500 coins it is +0.43% at p = 0.001; at 800 it is <strong>&minus;0.29% at p = 0.0005</strong>. Real, replicable, and 2.4 points short. <strong>Every one of the top 25 rules is a variation on &ldquo;the coin was quiet&rdquo;</strong>, and all eight best single conditions land straddling the &minus;2.111% fee floor. The search found the fee floor and nothing else.</p>
+  </div>
+
+  <div class="box good">
+    <h3>The one thing that beats chance is refusing coins &mdash; and it stops at the fee floor too</h3>
+    <p><strong>Every single one of the bottom 25 rules</strong> contains the same condition: the coin had already pumped within three seconds. The sharpest returns <strong>&minus;43.97%</strong> on 152 training coins and &minus;34.26% on the holdout &mdash; and <strong>0 of 2,000 shuffles ever produced a rule that bad</strong> (p = 0.0005; the worst noise ever managed was &minus;21.68%). It holds at every depth and every support threshold.</p>
+    <p>Stacked into an avoidance rule chosen on training days only, it lifts the holdout from &minus;7.750% to <strong>&minus;2.433%</strong>, refusing half the book, replicating on all four days &mdash; slightly better than the fitted model&rsquo;s &minus;3.3%.</p>
+    <p style="margin-bottom:0"><strong>And then it stops.</strong> The interval&rsquo;s upper bound is &minus;0.84%, so break-even is excluded; the median retained coin returns exactly &minus;2.111%; and 48% of the retained book sits within 0.3 points of the fee floor. The drop test explains why: <strong>the refused set is winner-rich.</strong> 3.2% of refused coins return above +50% against 1.8% of retained, and the single strongest condition discards <strong>69 of the 124 big training winners</strong>. It buys the fee floor by refusing the crashes and most of the moonshots together. <strong>It converges to the fee floor from below and stops there.</strong></p>
+  </div>
+
+  <div class="box flag">
+    <h3>The question you actually asked, answered properly</h3>
+    <p>The brief gave one example: compare the wallet charts &ldquo;to see how they&rsquo;re structured and <strong>see how much time you&rsquo;d have before you can get out</strong>.&rdquo; An agent tested the <em>insider</em> version early and found the window is negative. Nobody built the general map. Here it is.</p>
+    <p><strong>75.6% of coins have no profitable exit window at all</strong> &mdash; in the 57 seconds after you could act, the price never once reaches the +2.15% needed to clear the fee. Median window: <strong>zero seconds</strong>.</p>
+    <p><strong>Width is genuinely predictable</strong> &mdash; holdout AUC <strong>0.823</strong> against a permuted null whose maximum over 500 draws is 0.560. But it is one variable: <em>how many wallets bought in the first three seconds</em> scores 0.815 alone, and the entire rest of the wallet book adds <strong>+0.008</strong>. Concentration looked powerful and is an artifact &mdash; the top-holder share correlates &minus;0.953 with the log buyer count, so it is that number wearing a different name.</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Holdout, matched exposure</th><th class="n">All coins</th><th class="n">Widest 10% of windows</th><th class="n">Narrowest half</th></tr></thead>
+        <tbody>
+          <tr><td>exit at 10s</td><td class="n">&minus;3.97%</td><td class="n"><strong>&minus;10.57%</strong></td><td class="n">&minus;2.26%</td></tr>
+          <tr><td>exit at 30s</td><td class="n">&minus;6.18%</td><td class="n"><strong>&minus;10.98%</strong></td><td class="n">&minus;3.02%</td></tr>
+          <tr><td>exit at 59s</td><td class="n">&minus;7.22%</td><td class="n"><strong>&minus;14.49%</strong></td><td class="n">&minus;3.57%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>The coins that give you the widest window are the ones that spend it falling.</strong> The narrow-window coins lose least &mdash; a median of exactly &minus;2.111%, the round-trip fee on a price that never moved.</p>
+    <p style="margin-bottom:0"><strong>And a red team took the 0.823 away too.</strong> The target is structurally leaky: "a profitable window existed" is a maximum over up to 57 candle closes, and it is zero by construction on every coin that never trades again. So what the model predicts is <em>how many times the price got drawn</em> &mdash; draw count alone scores <strong>0.9345</strong>. Condition on it and buyer count collapses to a pooled <strong>0.4455, worse than a coin flip</strong>. The tradeable version inverts outright: at a fixed 30-second exit the lowest buyer-count quartile returns &minus;3.68% and the highest returns <strong>&minus;11.49%</strong>. The liveness detector for the seventh time, with a negative sign.</p>
+  </div>
+
+  <div class="box good">
+    <h3>And it found the population every other agent had thrown away</h3>
+    <p>Ninety-nine coins sit at exactly 200 recorded wallets &mdash; the cap. Every agent in this sweep excluded or flagged them; none studied them. <strong>Zero are actor-flagged and zero graduated</strong>, and they are a different market:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th></th><th class="n">The 99 capped coins</th><th class="n">Everything else</th></tr></thead>
+        <tbody>
+          <tr><td>share of all SOL staked</td><td class="n"><strong>12.3%</strong></td><td class="n">&mdash;</td></tr>
+          <tr><td>median SOL in</td><td class="n">159.6</td><td class="n">0.99</td></tr>
+          <tr><td>median buyers by second 3</td><td class="n">22</td><td class="n">2</td></tr>
+          <tr><td>zero-window share</td><td class="n"><strong>5.7%</strong></td><td class="n">76.6%</td></tr>
+          <tr><td><strong>median peak after second 3</strong></td><td class="n"><strong>2.10&times;</strong></td><td class="n">1.00&times;</td></tr>
+          <tr class="grad"><td>matched exposure at 30s</td><td class="n"><strong>+78.99%</strong>, 78.4% win</td><td class="n">&minus;6.18%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>And a red team then refuted it properly.</strong> The +78.99% is measured from the close of <em>second two</em>, not second three &mdash; entering when you actually decide gives +65.98%, so <strong>the honest entry costs 13 points of the headline</strong>. The survivorship is total: the 200-wallet cap is reached at a <strong>median of second 35.2</strong>, and only <strong>3 of 88 coins had hit it by second three</strong>. For 85 of 88 the selection criterion is unknowable at entry. And "broad, not outlier-driven" is half right &mdash; the top ten of 88 carry 40%, the standard deviation is 91 points, and 20.5% finish below the fee floor.</p>
+    <p><strong>The causally available version is negative at every threshold.</strong> Selecting on buyers visible at second three: 10+ gives &minus;10.27%, 30+ gives &minus;10.68%, 80+ gives &minus;3.25%, 120+ gives &minus;3.00%. Not one clears zero, and the median coin returns exactly &minus;2.111%.</p>
+    <p style="margin-bottom:0">The original three reasons stand and the red team adds a fourth. The label is <strong>lookahead</strong>: having 200 wallets is a sixty-second fact, and the best decision-point proxy reaches <strong>17.6% precision</strong>. The drop test kills it: that proxy reads +1.39% and <strong>stripping the three capped coins leaves the other fourteen at &minus;4.52%</strong>, with one coin at +109.5% carrying the whole thing. And inside the paying population <strong>the headcount points backwards</strong> &mdash; among the 88, correlation between buyer count and return is &minus;0.549.</p>
+  </div>
+
+  <div class="box flag">
+    <h3>Then I closed it a second time, and a third wave found the files nobody had opened</h3>
+    <p>Twenty-five agents had all gone to the same place. <strong>Six file types had never been opened by anyone</strong> &mdash; the recorder&rsquo;s own audit logs, <code>sts.db</code> itself, and four flux files including 11,125 real transactions with real fees. Reading them changed three standing conclusions.</p>
+
+    <p><strong>One: the observation latency is not 1.7 seconds.</strong> Every latency argument on this page rests on that number. The flux logs carry both a local receipt time and the chain time, validated against RPC block times on 11,530 transactions &mdash; identical on 100.0%. Measured directly:</p>
+    <div class="tw" style="margin-top:14px;margin-bottom:16px">
+      <table>
+        <thead><tr><th>Observation lag behind the chain</th><th class="n">p25</th><th class="n">Median</th><th class="n">p75</th><th class="n">p95</th><th class="n">Max</th></tr></thead>
+        <tbody>
+          <tr><td>all 11,530 events</td><td class="n">1.99s</td><td class="n"><strong>4.08s</strong></td><td class="n">8.52s</td><td class="n">43.19s</td><td class="n">94.78s</td></tr>
+          <tr><td>best session (n=1,272)</td><td class="n">&mdash;</td><td class="n">1.73s</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+          <tr><td>worst session (n=1,691)</td><td class="n">&mdash;</td><td class="n"><strong>41.51s</strong></td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The source file quotes &ldquo;median 1.7 s over 1,214 consecutive events&rdquo;, which reproduces almost exactly as <em>one session</em>. <strong>1.7 s is the best observed session, not the typical condition.</strong> I attacked this on two grounds and <strong>both were false</strong>: all four session-start records carry the same public endpoint, so it is not a provider difference &mdash; and the 1.7 s figure&rsquo;s own sample size identifies it as <em>session one of this same capture</em>. The local clock is not the problem either: within-slot spread is a median 0.265 s, and throughput runs <em>backwards</em> to lag. The defensible statement is <strong>1.7 to 4.1 seconds when the feed keeps up, and unbounded when it does not</strong> &mdash; one session diverged to 87 seconds on a monotone ramp. Every event rule already failed at 1.7 s, so no conclusion flips.</p>
+
+    <p><strong>Two: the duty cycle is now measured rather than inferred.</strong> Seven recorder processes, not the ~50 sessions inferred from gaps. Calendar span 5.66 days; process uptime 16.89 hours; 73 socket gaps totalling 11.01 hours; <strong>actually receiving: 5.88 hours &mdash; 4.33% of wall clock.</strong> The believed &ldquo;3&ndash;72%&rdquo; was right at its low end and the inference method is sound to within about 10%, but <strong>the 72% upper end is not supported for any whole day.</strong></p>
+
+    <p style="margin-bottom:0"><strong>Three: a test declared impossible was runnable all along.</strong> An earlier agent ruled out the later social samples because &ldquo;the price record ends at sixty seconds&rdquo;. It does not &mdash; the tracker watches 5,003 mints for a median of 43,313 seconds, and 97.1% for at least 600. So the blocked test was run on 2,166 rows, and <strong>it returns nothing</strong>: median peak is 1.0000 in every bucket. A clean negative that closes the question instead of leaving it open. The reason it was dismissed was also wrong &mdash; &ldquo;engagement deltas are zero on 80.5% of rows&rdquo; is the <em>retweet</em> field; <strong>views move on 93.2% of rows</strong>.</p>
+  </div>
+
+  <div class="box good">
+    <h3>And the first direct price on the second-zero seat</h3>
+    <p>The transaction-cost file had no mint overlap with the coin corpus, which killed the obvious join and was where an earlier agent stopped. But it has <strong>100% signature overlap with its own event log</strong> &mdash; 11,125 of 11,125 &mdash; and that yields fee against trade size:</p>
+    <ul style="margin-bottom:12px">
+      <li><strong>Trades landing in the launch slot itself pay a median 305,000 lamports against 105,000 for later slots</strong> &mdash; about 3&times;, and 4.5M against 1.0M at the 90th percentile. That is the first measured price anywhere in this sweep on the seat that pays.</li>
+      <li><strong>41.5% of launches pay zero priority fee; only 3.9% of early trades do.</strong> Creators do not race. Buyers do.</li>
+      <li>Priority fee as a share of trade size is a <strong>median 0.061%</strong> &mdash; two orders of magnitude below the protocol fee. <strong>It is not the binding cost.</strong></li>
+      <li>And the protocol fee is now a measured constant rather than an assumption: <strong>0.9500% on 96.9% of 69,732 historical trades.</strong> The 1.90% round trip is real.</li>
+    </ul>
+    <p style="margin-bottom:0">One more trap it caught: the recorder&rsquo;s own shutdown statistics report 84&ndash;94% of messages failing, which is an artifact of counting failures before the deduplication check. The trustworthy figure from full-block data is <strong>6.6% to 22.6%</strong>. Anyone reading those stats naively is wrong by an order of magnitude.</p>
+  </div>
+
+  <p><strong>And know what the survivors are worth before deciding anything.</strong> The avoidance stack is the most durable finding here and it earns <strong>&minus;0.42 SOL an hour</strong> at a small clip; it has no positive size. The creator position is the only robust positive and the <em>best operator in thirty recorded hours</em> made <strong>+8.92 SOL an hour</strong> from it, while the median one made 0.17 SOL in total. Whatever you decide about the ethics, decide it against those numbers rather than against the percentages.</p>
+
+  <p><strong>Build the detector instead, if you build anything.</strong> Two rules, no model, no training, no fitting. One is arithmetic that cannot be violated by an honest trade; the other is a running count per creator. Together they flag 35.9% of launches and cover 52.3% of the money being taken. Nobody else appears to have the first one &mdash; flux&rsquo;s own decoder already self-checks the fee identity and passes it 100%, and it does not check the curve identity, which is the one that catches this.</p>
+  <p><strong>Two honest caveats on that.</strong> It protects other people, not you; there is no version of it that turns into a position. And the certainty and the reach live in different rules &mdash; the one with no false positives reaches 2.2% of the money, and the one that reaches half the money is the 0.82 that a red team just marked down from 0.94.</p>
+  <p><strong>And if you ever capture again, these six fields are the difference between answerable and blind.</strong> Every one of them cost this sweep something specific &mdash; agents re-briefed mid-run, tests declared impossible, numbers reconstructed instead of measured. Ordered by what they unlock:</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Change</th><th>What it costs</th><th>What it unlocks</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Stop resetting the running high and low at adoption</td>
+          <td>one line</td>
+          <td>The single worst defect in the corpus. It <strong>fabricated 74.6% of long-horizon ladder crossings</strong>, and it makes both the graduation approach and the entire twelve-hour horizon untestable. One agent had <strong>35 profitable cells until correct fills took it to zero.</strong></td>
+        </tr>
+        <tr>
+          <td class="what">Record a per-trade row &mdash; <code>(second, wallet, side, sol, tokens)</code></td>
+          <td>one append per trade</td>
+          <td>Today there are three frozen snapshots per wallet and nothing between, so <strong>no question about reacting to somebody else&rsquo;s action is settleable in either direction</strong>. Three agents were re-briefed mid-run over this, and five separate results had to bracket a bag valuation they could have measured.</td>
+        </tr>
+        <tr>
+          <td class="what">Record slot and transaction index</td>
+          <td>two fields</td>
+          <td>Block position is currently <em>reconstructed from the curve</em> rather than observed. It is the variable the only real edge lives in, and the difference between slot 0&ndash;1 and the back of the bundle is the largest swing in this corpus.</td>
+        </tr>
+        <tr>
+          <td class="what">Record priority fee and compute units per trade</td>
+          <td>two fields</td>
+          <td>Landing in the launch slot costs a median <strong>305,000 lamports against 105,000 later</strong> &mdash; the only direct price on the seat anywhere, and it was found by accident in a different project&rsquo;s files.</td>
+        </tr>
+        <tr>
+          <td class="what">Remove the 200-wallet cap, or record that it bound</td>
+          <td>one flag</td>
+          <td>The <strong>99 capped coins carry 12.3% of all SOL</strong> and every per-wallet statistic on them is a floor. <code>whoCapped</code> exists in the current recorder and is absent from every row here.</td>
+        </tr>
+        <tr>
+          <td class="what">Rotate files on launch time, and make the tweet-reuse counter causal</td>
+          <td>two lines</td>
+          <td>Files rotate on <em>write</em> time, so coins land in the wrong day. And <code>social.nth</code> resets every recorder session &mdash; it matches a causal count on <strong>84% of rows</strong>, and it was load-bearing in the social work.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p style="margin-bottom:0">Two of those &mdash; the reset and the missing trade timeline &mdash; are not conveniences. They are why several questions in this report end in <em>&ldquo;unanswerable&rdquo;</em> rather than <em>&ldquo;no&rdquo;</em>, and they would be cheap to fix before the next session rather than after it.</p>
+  </div>
+</section>
+
+<section class="col">
+  <h2><span class="num">Method</span>What to trust, and what I found wrong</h2>
+  <p>Every agent worked read-only on the real captures, corrected the corpus the same way, priced own-order impact from the curve state at both ends, priced stops at the close of the second they triggered rather than at the level, graded every timing rule against a matched-exposure stopwatch, corrected for multiplicity, ran a shuffled null, and scored 08-16 exactly once. Several ran a leakage positive control &mdash; injecting a banned future field and confirming the score jumped.</p>
+
+  <h3>Corpus defects found today, all of which affect earlier work</h3>
+  <ul>
+    <li><strong>116 mints appear in more than one file.</strong> 12,205 lines are 12,089 coins, so anything that concatenated the seven files double-counted about 1%.</li>
+    <li><strong>A silent 1000&times; units break</strong> on the first three days. It does not look wrong if you miss it, because peak-over-entry ratios are scale-free.</li>
+    <li><strong>The recorded files are an older schema than the current recorder.</strong> <code>outcome.complete</code>, <code>gapSec</code>, <code>observedSec</code>, <code>feeBps</code>, <code>whoCapped</code> and the candle reserve fields do not exist. Hygiene rules written against them are not buildable.</li>
+    <li><strong><code>social.nth</code> resets every recorder session</strong> and matches a causal count on only 83.3% of rows. It was load-bearing in the social work.</li>
+    <li><strong>The verdict&rsquo;s &ldquo;seven hour-matched windows&rdquo; are not hours.</strong> They are 5 to 8.5 minutes each, 43.8 minutes of chain time in total. The hour-matching is real; the duration is not, and no trend should be read across seven short samples.</li>
+    <li><strong>The capture corpus is 30.0 recorded hours, not seven days</strong> &mdash; 340 clean launches per recorded hour. A rule trading the top 2% would fire 163 times a day, not eleven times a month. This is a firehose, and it matters for what any strategy&rsquo;s numbers mean.</li>
+    <li><strong>A fourth trap in the twelve-hour tracker, found on the last day of the sweep.</strong> Because its running high and low are <em>reset to 1 when it adopts a coin</em>, the first trade after second 60 retroactively records a &ldquo;crossing&rdquo; of every ladder level between the sixty-second price and the three-second price. <strong>1,170 of the 1,569 rows with any crossing &mdash; 74.6% &mdash; contain at least one crossing that never happened.</strong> One coin sitting at 0.13&times; its entry records five levels crossed in a single second it was never near. The agent that found it had <strong>35 profitable cells in its first run; correct fills took that to zero.</strong></li>
+    <li><strong>Only one day is a real twelve-hour observation.</strong> 08-20 has a median watch of 43,541 seconds; 08-21 was cut short at ~9.3 hours; and <strong>08-16, the designated holdout, tops out at 319 seconds</strong> &mdash; it cannot hold out a long-horizon question at all.</li>
+    <li><strong>The recorder ran in 50 disjoint sessions</strong>, so hour-of-day is a day grid in disguise: only 7 hours appear on more than one day with n&nbsp;&ge;&nbsp;30, each dominated by a single day. <strong>This corpus measures the recorder as much as it measures the market</strong>, and that bounds any time-conditioned claim.</li>
+  </ul>
+
+  <h3>A number I repeated without checking, and it was wrong</h3>
+  <p>The completeness critic reported a monotone ~5-point gradient in expectancy by the launch rate in the preceding minute &mdash; &minus;3.66% at the quietest against &minus;8.51% at the busiest &mdash; and I recorded it as &ldquo;real but does not cross zero&rdquo;. Re-derived properly, it exists only in one outcome universe, <strong>does not appear at all</strong> in the four days that have candles, and &mdash; decisively &mdash; <strong>the within-day null&rsquo;s median spread is 5.577 points, larger than the observed 5.305.</strong> p = 0.5607. The direction was right and the size is exactly what shuffling produces. I should have tested it before repeating it.</p>
+
+  <h3>One loose end, closed</h3>
+  <p>The critic also caught this document carrying three different perfect-hindsight ceilings &mdash; 14.39%, 12.04% and 10.5% &mdash; while several statements divide by one of them. Recomputed across every population and order size, buying at second three and selling at the sixty-second peak, net of fees:</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Population</th><th class="n">0.05 SOL</th><th class="n">0.25 SOL</th><th class="n">1.0 SOL</th><th class="n">Median</th><th class="n">Clear the fee</th></tr></thead>
+      <tbody>
+        <tr><td>clean, every day with candles</td><td class="n">14.39%</td><td class="n">14.21%</td><td class="n">13.58%</td><td class="n">&minus;2.08%</td><td class="n">38.2%</td></tr>
+        <tr><td>clean, development days only</td><td class="n">14.58%</td><td class="n">14.39%</td><td class="n">13.74%</td><td class="n">&minus;2.11%</td><td class="n">38.0%</td></tr>
+        <tr><td>clean, holdout 08-16 only</td><td class="n">13.60%</td><td class="n">13.44%</td><td class="n">12.86%</td><td class="n">&minus;1.86%</td><td class="n">39.2%</td></tr>
+        <tr class="grad"><td><strong>as recorded, manipulation left in</strong></td><td class="n"><strong>26.92%</strong></td><td class="n">26.42%</td><td class="n">24.76%</td><td class="n">&minus;1.48%</td><td class="n">45.5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>They were never in conflict. The clean ceiling sits in a 12.9&ndash;14.6% band across every day and size; the 12.04% was the same quantity measured to a <em>realisable</em> exit rather than the recorded high, which is properly a little lower; the 10.5% was that same figure under an impact bug since corrected. Two things are worth taking from the table. <strong>Leaving the manipulation account in nearly doubles the ceiling</strong> &mdash; 14.39% to 26.92% &mdash; which is the cleanest single demonstration of why every headline here excludes it. And <strong>the median ceiling is &minus;2.08%, the fee floor</strong>: even with perfect foresight of the peak, the median coin pays the toll and nothing else, and 38% of coins fail to clear the fee <em>when sold at their own high</em>.</p>
+
+  <h3>A hard ceiling on what this data can ever settle</h3>
+  <p>Worth stating plainly, because it bounds every selective result above and below. Per-coin net return has a standard deviation of <strong>37 to 43 percentage points</strong>. To establish a genuine +2.12% edge at 80% power you need about <strong>1,900 trades</strong>. Which means:</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Slice</th><th class="n">n</th><th class="n">Smallest effect it could detect</th></tr></thead>
+      <tbody>
+        <tr><td>whole training universe</td><td class="n">8,824</td><td class="n">1.0pp</td></tr>
+        <tr><td>whole holdout day</td><td class="n">1,393</td><td class="n">2.7pp</td></tr>
+        <tr><td>top 10%, training</td><td class="n">882</td><td class="n">3.1pp</td></tr>
+        <tr><td>top 2%, training</td><td class="n">176</td><td class="n">6.9pp</td></tr>
+        <tr><td><strong>top 2%, holdout</strong></td><td class="n">27</td><td class="n"><strong>19.4pp</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>A rule trading the top 2% could only ever prove itself here if it made about seven percent a trade.</strong> So the negatives on broad populations are solid, and any positive-looking number on a narrow slice &mdash; including the ones in this report &mdash; is under-powered by construction. That is not a reason to disbelieve them; it is a reason to say what they are.</p>
+
+  <h3>Three numbers that were wrong and got caught</h3>
+  <ul>
+    <li>An exit agent charged own-order impact into the recorded reserve, as if its own buy had evaporated from the curve. I challenged it, derived the correct treatment, and it found the bug: round-trip impact on a constant-product curve is <strong>exactly zero</strong> at an unchanged reserve, at any size. Every number moved 1.5 to 5.7 points.</li>
+    <li>The strongest-looking feature in the project, <code>initialBuySol</code>, was a bounded-downside artefact. On a curve the price cannot fall below launch, so it <em>is</em> where on the curve you buy. Controlling for entry price collapsed &Delta;R&sup2; from +0.011 to +0.00003.</li>
+    <li>My own closed-box headline. I asserted the creator takes 5.63 of every 100 SOL staked and could not support it; the honest answer is a bracket that straddles zero, and the fee is the only certain term.</li>
+  </ul>
+
+  <h3>And one kill I should not have banked</h3>
+  <p>The published shortlist feature this whole plan rested on &mdash; 1.07% to 12.15% reaching 2&times; &mdash; was reported as <em>vanishing</em> once the manipulation account is removed: one coin in 141 against zero in 427. The critic checked the arithmetic. At the without-actor base rate of 2.24% you expect 3.17 hits in 141, and <strong>P(&le;1) = 0.173</strong>. Observing one is entirely consistent with the effect being unchanged. The correct word is <em>uninformative</em> &mdash; which is exactly the word this document used for a 68-coin lead it kept. I held the retraction to a looser standard than the finding.</p>
+  <p>The same critique named a mechanism worth taking seriously: <strong>removing that account is a population change, not a control.</strong> After removal the clean arm produced zero 2&times; events where the recorded rate predicts 9.6 (p = 0.0001), so it is a population with much less outcome variance &mdash; and that could turn a real effect into a null.</p>
+  <p><strong>A later agent drop-tested it directly and the objection does not hold.</strong> The filter <em>removes</em> coins whose buy-and-hold return is &minus;11.68% (median &minus;34.08%) and <em>keeps</em> coins at &minus;8.59% (median &minus;2.25%). Excluding the account makes the universe <strong>less</strong> extreme, not more &mdash; so it cannot be manufacturing the negative results. It is hygiene, not a selection rule. Good criticism, and it was worth checking rather than assuming either way.</p>
+
+  <h3>One identity that collapses several &ldquo;different&rdquo; signals into one</h3>
+  <p>Worth recording because it changes how to read the whole scorecard. On a bonding curve, net flow between two moments is <code>sqrt(k&middot;p&#8322;) &minus; sqrt(k&middot;p&#8321;)</code>, and the square root is monotone. So <strong>&ldquo;net SOL flow turned negative&rdquo; and &ldquo;the price fell&rdquo; are the same event &mdash; 100.0000% agreement across 211,120 coin-second pairs.</strong> Contrarian-on-flow and contrarian-on-price are not two ideas, and several signals tested separately in this sweep were literally the same signal under different names. On a venue with an order book they would be genuinely distinct; here the curve makes them identical by construction.</p>
+
+  <h3>What the sweep never asked</h3>
+  <p>The critic&rsquo;s lead, and it was fair: <strong>twelve agents asked which coin to buy and not one priced the other side of the trade</strong>, even though the document&rsquo;s own conclusion named that side as the only profitable one. I sent two agents at it, and both gaps are now closed &mdash; the creator side is priced above and the bundle seat is priced above that. Between them they produced the only two positive numbers of the day and the correction to my own retraction, so the criticism earned its keep.</p>
+  <p>It also flagged that the corpus is not 12,089 independent launches &mdash; 817 tweet ids are reused across 4,955 coins and one tweet spawned 116. Cohort position as an entry rule is dead, and a cluster bootstrap by handle puts the design effect at 1.04&times;, so the intervals here survive the dependence.</p>
+  <p>Its third suggestion &mdash; add <code>social.handle</code> as a second identity axis to lift the detector&rsquo;s coverage from 62.5% to 75.3% &mdash; I sent to an agent, and it is <strong>apparent coverage only</strong>. With the window-closed rule the gain is 6.9 points, not 12.8, and on exactly the coins the wallet axis is blind to the handle predicts nothing: <strong>AUC 0.5322</strong>, p = 0.29, precision lift 1.03&times;, below what a field with no behavioural content reaches on the same coins. <code>statusId</code> adds no coverage at all and scores 0.41, worse than chance. The reason is the interesting part: handle-to-creator is not one-to-one, and the top handles are <code>imjustaguyfun</code> at 116 coins across <strong>114 different wallets</strong>. <strong>The handle identifies whose tweet got scraped, not who deployed</strong> &mdash; it covers because tweets are recycled and cannot predict because the person it names is not the person who dumps. Ship on the creator wallet alone.</p>
+  <h3>The three adversarial passes, and what each returned</h3>
+  <p>Two agents were sent to <em>refute</em> the surviving claims rather than confirm them, told to default to &ldquo;refuted&rdquo; when uncertain. A third was sent at this document to find what the sweep missed. They earned their cost:</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Pass</th><th>Verdict</th><th>What it changed</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="what">Refute the creator rug detector</td>
+          <td><span class="chip no">Refuted</span></td>
+          <td>AUC 0.94 &rarr; <strong>0.82</strong>. Reproduced the 0.94 to four decimals by making the feature self-inclusive, which is the signature of the bug. Confirmed the trading result by its own route and found it <em>worse</em> than reported</td>
+        </tr>
+        <tr>
+          <td class="what">Refute the manipulation detector</td>
+          <td><span class="chip yes">Survived</span></td>
+          <td>Could not manufacture a single false positive at any margin or window. But refuted five surrounding claims: &ldquo;27&times; less money&rdquo; is 10&times;, &ldquo;available at 3 seconds&rdquo; is 5.7 seconds, and calling the account an <em>operator</em> is unsupported &mdash; it is off-curve, cannot sign, and is break-even across all 1,798 of its coins</td>
+        </tr>
+        <tr>
+          <td class="what">Find what the sweep missed</td>
+          <td><span class="chip part">Three hits</span></td>
+          <td>Caught that nobody had priced the counterparty side, that a kill I banked was underpowered, and that my own closed-box headline was a mark-to-model. Two of the three led directly to the only positive numbers in this report</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-bottom:0">The pattern worth keeping: <strong>not one of the corrections came from re-reading a report.</strong> Every one came from somebody recomputing the number from the raw files by a different route &mdash; which is the same lesson this project learned the hard way the night before, and it held again today, including on me.</p>
+</section>
+
+<footer class="col">
+  <p>Run 27 August 2026, 10:35&ndash;13:50 UTC. Thirty-one agents across four waves, read-only on <code>STS/data/</code> and <code>flux/data/</code>; nothing was written to either and nothing was committed to the repo. Every number here came from a command that was run, not from memory.</p>
+  <p>The durable copy is <code>~/Code/backups/sts-edge-sweep-2026-08-27/</code> &mdash; <code>FINDINGS.md</code> is the full evidence with every result, correction and pasted output; <code>detector.py</code> is the two rules implemented and run; <code>coins-extract.jsonl</code> and <code>extract.py</code> are the corrected per-coin projection everything was built on, with its two known gaps documented. The corpus defects found today were also posted to the shared coordination board inside the repo, which is gitignored and will not survive &mdash; if any of it should outlast the machine, it needs a commit.</p>
+</footer>
+
+</div>
