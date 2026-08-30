@@ -12,7 +12,7 @@ the question nobody can answer by looking is whether any of it is real.
 
 the normal way to attack this is a model: score the wallets, weight the features, train something on coins that turned out to be rugs, get a probability out. i do not like that answer, because a model can be wrong and you cannot check it, and because whatever it learned was learned from last month's scams.
 
-so i went looking for something that could not be wrong.
+so i went looking for something that could not be wrong. like i always do
 
 ## the idea
 
@@ -38,7 +38,7 @@ it does have to do a couple of unglamorous things by hand to stay dependency fre
 
 ## what happened
 
-zero false positives across the whole corpus. 12,089 recorded launches, no honest trade ever flagged.
+zero false positives across the whole corpus, yay, 12,089 recorded launches, no honest trade ever flagged.
 
 that number comes from a sweep where 31 agents tested 4.6 million rules against real captured launches. no entry signal survived. no exit rule survived. no wallet-following scheme survived. the median trade was -2.11%, which is exactly the round trip fee, meaning the median outcome is you pay the toll and nothing happens.
 
@@ -48,7 +48,7 @@ so this is what a failed trading project leaves behind. not a strategy, a measur
 
 ## what it will not do
 
-it will never tell you a coin is safe.
+it will never tell you a coin is safe. Because the guy from wolf of wall street said no one knows if a stock (or in this case coin) will go up down or sideways 
 
 it reports what is there. a coin can pass every check in here and still be a rug launched by someone patient, and a coin can fail and just be weird. the identity catches manufactured volume, and manufactured volume is one specific lie out of many available.
 
