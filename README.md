@@ -2,13 +2,15 @@
 
 > i spent seventeen days building a trading system for pump.fun.
 > it lost money at every horizon i tested.
-> this is the one piece of it that worked.
+> this is the one piece of it that worked. Thanks claude. my big C. 
 
-## the problem
+## the problem and before everything else
+
+My math when it came to this specific project failed so I had big C do most of it, well almost all of it, but man you wouldn't believe the mistakes it made holy anyway back to the point:
 
 a pump.fun coin looks like it is trading. there is a chart, there is volume, there are trades going through.
 
-the question nobody can answer by looking is whether any of it is real.
+the question nobody can answer by looking is whether any of it is real. of course.
 
 the normal way to attack this is a model: score the wallets, weight the features, train something on coins that turned out to be rugs, get a probability out. i do not like that answer, because a model can be wrong and you cannot check it, and because whatever it learned was learned from last month's scams.
 
@@ -78,4 +80,4 @@ mac and windows apps on the [releases page](https://github.com/Cadaquesenc/curve
 - ✅ ships, works, zero false positives on 12,089 launches
 - ❌ the trading system it came out of does not work at all
 - 🧮 arithmetic, not a model
-- ⚠️ never says a coin is safe
+- ⚠️ never says a coin is safe 
